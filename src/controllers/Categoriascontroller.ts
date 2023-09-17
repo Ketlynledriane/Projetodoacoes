@@ -6,10 +6,9 @@ export class CategoriasController {
         return await Categorias.find();
     }
 
-    async create (descricao: string, situacao: string) {
+    async create (descricao: string) {
         let categoria: Categorias = Categorias.create({
             descricao,
-            situacao
         });
         await categoria.save();
         return categoria;
