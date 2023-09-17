@@ -10,10 +10,12 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^20.6.2",
+    "@types/prompt-sync": "^4.2.0",
     "typescript": "^5.2.2"
   },
   "dependencies": {
     "@types/prompt-sync": "^4.2.0",
+    "prompt-sync": "^4.2.0",
     "typeorm": "^0.3.17"
   }
 }
