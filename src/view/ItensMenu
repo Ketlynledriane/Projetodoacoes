@@ -1,78 +1,78 @@
 import { Itens } from '../models/Itens';
-
+import { ItensController } from '../controllers/ItensController'; 
 import promptSync from 'prompt-sync';
 const prompt = promptSync();
 
 export class ItesnMenu {
 
-  public controller: ItesnMenu;
+  public controller: ItensController;
 
   constructor () {
-    this.controller = new 
+    this.controller = new ItensController();
   }
 
   public show (): void {
-      console.log('5 - Cadastrar nova categoria');
-      console.log('6 - Editar categoria');
-      console.log('7 - Listar categorias');
-      console.log('8 - Excluir categoria');
+      console.log('9 - Cadastrar nova categoria');
+      console.log('10 - Editar categoria');
+      console.log('11 - Listar categorias');
+      console.log('12 - Excluir categoria');
   }
 
   public async execute (input: string): Promise<void> {
     switch (input) {
-      case '5':
+      case '9':
         await this.create();
         break;
-      case '6':
+      case '10':
         await this.edit();
         break;
-      case '7':
+      case '11':
         await this.list();
         break;
-      case '8':
+      case '12':
         await this.delete();
         break;
     }
   }
 
   private async list (): Promise<void> {
-    let categorias: Categorias[] | null = await this.controller.list();
+    let itens: Itens[] | null = await this.controller.list();
 
-    console.table(categorias?.map(function (categoria: Categorias) {
+    console.table(itens?.map(function (itens: Itens) {
       return {
-        id: categoria.id,
-        descricao: categoria.descricao,
+        id: itens.id,
+        descricao: itens.descricao,
       }
     }));
   }
 
   private async create (): Promise<void> {
-    let descricao: string = prompt('Digite a descrição: ');
-    let situacao = 'A';
-    let categoria: Categorias = await this.controller.create(descricao);
-    console.log(`Categoria ID #${categoria.id} criada com sucesso!`);
+    let descricao: string = prompt('Digite a descrição do item: ');
+    let id_categoria: number = Number(prompt('Digite o ID da categoria: '));
+    let itens: Itens = await this.controller.create(descricao, id_categoria);
+    console.log(`Item ID #${itens.id} criado com sucesso!`);
   }
 
   private async edit (): Promise<void> {
     let id: number = Number(prompt('Qual o ID? '));
-    let categoria: Categorias | null = await this.controller.find(id);
-    if(categoria){
-        categoria.descricao = prompt(`Descrição: (${categoria.descricao}) `, categoria.descricao);
-        console.log(`Categoria ID# ${categoria.id} atualizada com sucesso!`);
-        await this.controller.save(categoria);
+    let itens: Itens | null = await this.controller.find(id);
+    if(itens){
+        itens.descricao = prompt(`Descrição: (${itens.descricao}) `, itens.descricao);
+        console.log(`Item ID# ${itens.id} atualizado com sucesso!`);
+        await this.controller.save(itens);
     } else {
-      console.log('Categoria não encontrada!');
+      console.log('Item não encontrado!');
     }
   }
 
   private async delete (): Promise<void> {
     let id: number = Number(prompt('Qual o ID? '));
-    let categoria: Categorias | null = await this.controller.find(id);
-    if (categoria) {
-      await this.controller.delete(categoria);
-      console.log(`Categoria ID #${id} excluída com sucesso!`);
+    let itens: Itens | null = await this.controller.find(id);
+    if (itens) {
+      await this.controller.delete(itens);
+      console.log(`Item ID #${id} excluído com sucesso!`);
     } else {    
-      console.log('Categoria não encontrada!');
+      console.log('Item não encontrado!');
     }
   }
   
