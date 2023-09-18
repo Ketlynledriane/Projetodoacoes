@@ -4,12 +4,12 @@ import { Itens } from '../models/Itens';
 import promptSync from 'prompt-sync';
 const prompt = promptSync();
 
-export class CategoriasMenu {
+export class ItesnMenu {
 
-  public controller: CategoriasController;
+  public controller: ItesnMenu;
 
   constructor () {
-    this.controller = new CategoriasController();
+    this.controller = new 
   }
 
   public show (): void {
