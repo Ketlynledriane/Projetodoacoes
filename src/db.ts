@@ -17,4 +17,3 @@ const AppDataSource = new DataSource({
 })
 
 export default AppDataSource;
-//teste da Amanda
