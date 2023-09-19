@@ -1,6 +1,5 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
 import { Itens } from "./Itens";
-import { ManyToOne } from "typeorm/browser";
 
 @Entity('categorias')
 export class CD_Itens extends BaseEntity {

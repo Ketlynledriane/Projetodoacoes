@@ -1,6 +1,5 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
 import { Categorias } from "./Categorias";
-import { ManyToOne } from "typeorm/browser";
 import { OneToMany } from "typeorm";
 import { CD_Itens } from "./CD_Itens";
 

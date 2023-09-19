@@ -16,8 +16,8 @@ async function main(): Promise<void> {
   do {
     console.clear();
 
-    itensMenu.show();
     categoriasMenu.show();
+    itensMenu.show();
 
     console.log('0 - Sair');
 

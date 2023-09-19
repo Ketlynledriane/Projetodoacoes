@@ -1,6 +1,5 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 import { Itens } from "./Itens";
-import { OneToMany } from "typeorm/browser";
 
 @Entity('categorias')
 export class Categorias extends BaseEntity {
