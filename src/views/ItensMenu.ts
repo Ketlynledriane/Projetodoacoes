@@ -13,10 +13,10 @@ export class ItesnMenu {
   }
 
   public show (): void {
-      console.log('9 - Cadastrar nova categoria');
-      console.log('10 - Editar categoria');
-      console.log('11 - Listar categorias');
-      console.log('12 - Excluir categoria');
+      console.log('9 - Cadastrar novo item');
+      console.log('10 - Editar item');
+      console.log('11 - Listar item');
+      console.log('12 - Excluir item');
   }
 
   public async execute (input: string): Promise<void> {
@@ -43,6 +43,7 @@ export class ItesnMenu {
       return {
         id: itens.id,
         descricao: itens.descricao,
+        id_categoria: itens.id_categoria
       }
     }));
   }
@@ -58,7 +59,8 @@ export class ItesnMenu {
     let id: number = Number(prompt('Qual o ID? '));
     let itens: Itens | null = await this.controller.find(id);
     if(itens){
-        itens.descricao = prompt(`Descrição: (${itens.descricao}) `, itens.descricao);
+        itens.descricao = prompt(`Descrição (${itens.descricao}): `, itens.descricao);
+        itens.id_categoria = Number (prompt(`Número da categoria (${itens.id_categoria}): `, itens.id_categoria));
         console.log(`Item ID# ${itens.id} atualizado com sucesso!`);
         await this.controller.save(itens);
     } else {

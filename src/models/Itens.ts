@@ -1,9 +1,8 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, OneToMany, ManyToOne, JoinColumn } from "typeorm";
 import { Categorias } from "./Categorias";
-import { OneToMany } from "typeorm";
 import { CD_Itens } from "./CD_Itens";
 
-@Entity('categorias')
+@Entity('itens')
 export class Itens extends BaseEntity {
     @PrimaryGeneratedColumn()
     public id: number;
@@ -18,7 +17,8 @@ export class Itens extends BaseEntity {
         eager: true,
         onDelete: "CASCADE"
     })
-    public categoria: Categorias;
+    @JoinColumn({ name: 'id_categoria' })
+    public categoria: Promise <Categorias>;
 
     @OneToMany(() => CD_Itens, (cd_itens) => cd_itens.itens)
     public cd_itens: CD_Itens[];
