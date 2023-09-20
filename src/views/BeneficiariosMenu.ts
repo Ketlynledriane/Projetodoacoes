@@ -1,13 +1,7 @@
-<<<<<<< HEAD
 import { Beneficiarios } from '../models/Beneficiarios';
 import { BeneficiariosControllers } from '../controllers/BeneficiariosController';
 import promptSync from 'prompt-sync';
-=======
-import { BeneficiariosControllers } from '../controllers/BeneficiariosController';
-import { Beneficiarios} from '../models/Beneficiarios';
-import promptSync from 'prompt-sync';
 
->>>>>>> e640998 (crud cidades)
 const prompt = promptSync();
 
 export class BeneficiariosMenu {
