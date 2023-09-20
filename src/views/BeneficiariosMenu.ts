@@ -1,10 +1,18 @@
+<<<<<<< HEAD
 import { Beneficiarios } from '../models/Beneficiarios';
 import { BeneficiariosControllers } from '../controllers/BeneficiariosController';
 import promptSync from 'prompt-sync';
+=======
+/*import { BeneficiariosControllers } from '../controllers/BeneficiariosController';
+import { Beneficiarios} from '../models/Beneficiarios';
+import promptSync from 'prompt-sync';
+
+>>>>>>> e640998 (crud cidades)
 const prompt = promptSync();
 
 export class BeneficiariosMenu {
 
+<<<<<<< HEAD
   public controller: BeneficiariosControllers;
 
   constructor () {
@@ -76,3 +84,75 @@ export class BeneficiariosMenu {
       }
     }
 }
+=======
+    public controller: BeneficiariosControllers;
+
+    constructor() {
+        this.controller = new BeneficiariosControllers();
+    }
+
+    public show(): void {
+        console.log('17 - Cadastrar novo beneficiario');
+        console.log('18 - Editar beneficiario');
+        console.log('19 - Listar beneficiarios');
+        console.log('20 - Excluir beneficiario');
+    }
+
+    public async execute(input: string): Promise<void> {
+        switch (input) {
+            case '17':
+                await this.create();
+                break;
+            case '18':
+                await this.edit();
+                break;
+            case '19':
+                await this.list();
+                break;
+            case '20':
+                await this.delete();
+                break;
+        }
+    }
+
+    private async list(): Promise<void> {
+        let usuario: Beneficiarios[] = await this.controller.list();
+        console.table(Beneficiarios?.map(function (usuario: Beneficiarios) {
+            return {
+                id: Beneficiarios.id,
+                nome: Beneficiarios.nome,
+                }
+        }));
+    }
+
+    private async create(): Promise<void> {
+        let nome: string = prompt('Nome: ');        
+        let usuario: Beneficiarios = await this.controller.create(nome);
+        console.log(`Beneficiario ID #${Beneficiarios.id} criado com sucesso!`);
+    }
+
+    private async edit(): Promise<void> {
+        let id: number = Number(prompt('Qual o ID? '));
+        let usuario: Beneficiarios | null = await this.controller.find(id);
+        if (Beneficiarios) {
+            usuario.nome = prompt(`Nome: (${Beneficiarios.nome}) `, Beneficiarios.nome);
+            
+            this.controller.save(Beneficiarios);
+            console.log(`Beneficiario ID# ${Beneficiarios.id} atualizado com sucesso!`);
+        } else {
+            console.log('Beneficiario não encontrado!')
+        }
+    }
+
+    private async delete(): Promise<void> {
+        let id: number = Number(prompt('Qual o ID? '));
+        let beneficiario: Beneficiarios | null = await this.controller.find(id);
+        if (beneficiario) {
+            await this.controller.delete(beneficiario);
+            console.log(`Usuario ID #${id} excluído com sucesso!`);
+        } else {
+            console.log('Usuario não encontrado!');
+        }
+    }
+}*/
+>>>>>>> e640998 (crud cidades)

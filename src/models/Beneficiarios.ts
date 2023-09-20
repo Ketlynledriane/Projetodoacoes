@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from "typeorm";
 import { Cidades } from "./Cidades";
 
@@ -21,3 +22,16 @@ export class Beneficiarios extends BaseEntity {
 public cidade: Promise <Cidades>;
 
 }
+=======
+import { Entity, Column, BaseEntity, PrimaryGeneratedColumn } from "typeorm";
+
+@Entity('beneficiarios')
+export class Beneficiarioss extends BaseEntity {
+    @PrimaryGeneratedColumn()
+    public id: number;
+
+    @Column()
+    public nome: string;     
+}
+
+>>>>>>> e640998 (crud cidades)
