@@ -60,7 +60,8 @@ export class ItesnMenu {
     let itens: Itens | null = await this.controller.find(id);
     if(itens){
         itens.descricao = prompt(`Descrição (${itens.descricao}): `, itens.descricao);
-        //itens.id_categoria = Number (prompt(`Número da categoria (${itens.id_categoria}): `, itens.id_categoria));     esta com problema pra alterar a categoria
+        itens.id_categoria = Number(prompt(`Número da categoria (${itens.id_categoria}): `, String(itens.id_categoria)));     
+        console.log(itens.id_categoria)
         console.log(`Item ID# ${itens.id} atualizado com sucesso!`);
         await this.controller.save(itens);
     } else {
