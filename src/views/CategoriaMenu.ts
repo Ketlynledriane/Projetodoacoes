@@ -1,5 +1,5 @@
 import { Categorias } from '../models/Categorias';
-import { CategoriasController } from '../controllers/Categoriascontroller';
+import { CategoriasController } from '../controllers/CategoriasController';
 import promptSync from 'prompt-sync';
 const prompt = promptSync();
 
@@ -48,7 +48,6 @@ export class CategoriasMenu {
 
   private async create (): Promise<void> {
     let descricao: string = prompt('Digite a descrição: ');
-    let situacao = 'A';
     let categoria: Categorias = await this.controller.create(descricao);
     console.log(`Categoria ID #${categoria.id} criada com sucesso!`);
   }
