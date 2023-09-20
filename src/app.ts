@@ -2,13 +2,15 @@ import DB from './db';
 import { ItesnMenu } from './views/ItensMenu';
 import { CategoriasMenu } from './views/CategoriaMenu';
 import { CD_ItesnMenu } from './views/CD_ItensMenu';
-
 import promptSync from 'prompt-sync';
+import { UsuariosMenu } from './views/UsuariosMenu';
+
+
 const prompt = promptSync();
 
 async function main(): Promise<void> {
-  
-
+  await DB.initialize();
+  let usuariosMenu: UsuariosMenu = new UsuariosMenu();
   let itensMenu: ItesnMenu = new ItesnMenu();
   let categoriasMenu: CategoriasMenu = new CategoriasMenu();
   let cd_itensMenu: CD_ItesnMenu = new CD_ItesnMenu();
@@ -18,6 +20,7 @@ async function main(): Promise<void> {
   do {
     console.clear();
 
+    usuariosMenu.show();
     categoriasMenu.show();
     itensMenu.show();
     cd_itensMenu.show();
@@ -32,6 +35,7 @@ async function main(): Promise<void> {
       await categoriasMenu.execute(input);
       await cd_itensMenu.execute(input);
       
+      await usuariosMenu.execute(input);
 
       prompt('Pressione enter para continuar');
     }
