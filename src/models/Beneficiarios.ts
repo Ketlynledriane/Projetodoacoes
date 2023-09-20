@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from "typeorm";
 import { Cidades } from "./Cidades";
 
@@ -6,6 +5,7 @@ import { Cidades } from "./Cidades";
 @Entity('beneficiarios')
 export class Beneficiarios extends BaseEntity {
   @PrimaryGeneratedColumn()
+
   public id: number;
 
   @Column()
@@ -22,7 +22,6 @@ export class Beneficiarios extends BaseEntity {
 public cidade: Promise <Cidades>;
 
 }
-=======
 import { Entity, Column, BaseEntity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('beneficiarios')
@@ -34,4 +33,3 @@ export class Beneficiarioss extends BaseEntity {
     public nome: string;     
 }
 
->>>>>>> e640998 (crud cidades)

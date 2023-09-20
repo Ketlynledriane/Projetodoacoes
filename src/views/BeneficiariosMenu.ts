@@ -3,7 +3,7 @@ import { Beneficiarios } from '../models/Beneficiarios';
 import { BeneficiariosControllers } from '../controllers/BeneficiariosController';
 import promptSync from 'prompt-sync';
 =======
-/*import { BeneficiariosControllers } from '../controllers/BeneficiariosController';
+import { BeneficiariosControllers } from '../controllers/BeneficiariosController';
 import { Beneficiarios} from '../models/Beneficiarios';
 import promptSync from 'prompt-sync';
 
@@ -12,7 +12,6 @@ const prompt = promptSync();
 
 export class BeneficiariosMenu {
 
-<<<<<<< HEAD
   public controller: BeneficiariosControllers;
 
   constructor () {
@@ -84,7 +83,6 @@ export class BeneficiariosMenu {
       }
     }
 }
-=======
     public controller: BeneficiariosControllers;
 
     constructor() {
@@ -154,5 +152,4 @@ export class BeneficiariosMenu {
             console.log('Usuario não encontrado!');
         }
     }
-}*/
->>>>>>> e640998 (crud cidades)
+}
