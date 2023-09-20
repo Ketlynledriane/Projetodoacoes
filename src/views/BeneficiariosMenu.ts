@@ -42,7 +42,8 @@ export class BeneficiariosMenu {
     console.table(beneficiario?.map(function (beneficiario: Beneficiarios) {
       return {
         id: beneficiario.id,
-        descricao: beneficiario.nome,
+        nome: beneficiario.nome,
+        cidade: beneficiario.id_cidade
       }
     }));
   }
@@ -51,7 +52,7 @@ export class BeneficiariosMenu {
     let nome: string = prompt('Digite o nome do beneficiario: ');
     let id_cidade: number = Number (prompt ('Digite o Id da cidade:'))
     let beneficiario: Beneficiarios = await this.controller.create(nome, id_cidade);
-    console.log(`Beneficiaio ID #${beneficiario}.id} criado com sucesso!`);
+    console.log(`Beneficiaio ID #${beneficiario.id} criado com sucesso!`);
   }
 
   private async edit (): Promise<void> {
