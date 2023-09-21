@@ -49,4 +49,16 @@ export class CDMenu {
         let cd: CD = await this.controller.create(nome, cidade);
         console.log(`CD ID #${cd.id} criado com sucesso!`);
     }
+
+    private async list(): Promise<void> {
+        let cd: CD[] | null = await this.controller.list();
+
+        console.table(cd?.map(function (cd: CD) {
+            return {
+                id: cd.id,
+                descricao: cd.nome,
+            }
+        }));
+    }
+
 }
