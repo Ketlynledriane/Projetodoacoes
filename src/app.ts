@@ -24,13 +24,30 @@ async function main(): Promise<void> {
   do {
     console.clear();
 
+    console.log("=======================");
+    console.log("[USUÁRIOS]");
     usuariosMenu.show();
+    console.log("");
+
+    console.log("[CATEGORIAS]");
     categoriasMenu.show();
+    console.log("");
+    console.log("[ITENS]");
     itensMenu.show();
-    cd_itensMenu.show();
+    console.log("");
+    console.log("[CIDADES]");
     cidadeMenu.show();
+    console.log("");
+    console.log("[BENEFICIARIO]");
     beneficiariosMenu.show();
+    console.log("");
+    console.log("[CD_ITENS]");
+    cd_itensMenu.show();
+    console.log("");
+  
+
     console.log('0 - Sair');
+    console.log("=======================");
 
     input = prompt('Selecione a opção desejada:');
 
