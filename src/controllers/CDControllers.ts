@@ -1,8 +1,12 @@
 import { CD } from "../models/CD";
+import { Cidades } from "../models/Cidades";
 
 export class CDControllers {
-    async create (id: number, nome: string, cidade: string) {
-        let cd: CD = CD.create({ nome });
+    async create (nome: string, cidade: Cidades) {
+        let cd: CD = CD.create({
+            nome,
+            cidade
+        });
         await cd.save();
         return cd;
     }

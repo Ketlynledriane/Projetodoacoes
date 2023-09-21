@@ -10,8 +10,8 @@ export class CD extends BaseEntity {
     @Column()
     public nome: string;
 
-    @ManyToOne(() => Cidades, (cidade) => cidade.cds)
-    public cidades: Cidades[];
+    @OneToMany(() => Cidades, (cidade) => cidade.cds)
+    public cidade: Cidades;
     
     @ManyToOne(() => CD_Itens, (cd_itens) => cd_itens.cds)
     public cd_itens: CD_Itens[];
