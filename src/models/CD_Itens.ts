@@ -1,5 +1,6 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany } from "typeorm";
 import { Itens } from "./Itens";
+import { CD } from "./CD";
 
 @Entity('cd_itens')
 export class CD_Itens extends BaseEntity {
@@ -12,10 +13,9 @@ export class CD_Itens extends BaseEntity {
     @Column()
     public id_cd: number;
 
-    @ManyToOne(() => Itens, (itens) => itens.cd_itens, {
-        eager: true,
-        onDelete: "CASCADE"
-    })
-    public itens: Itens;
+    @ManyToOne(() => Itens, (itens) => itens.cd_itens)
+    public itens: Itens[];
     
+    @OneToMany(() => CD, (cd) => cd.cd_itens)
+    public cds: CD[];
 }

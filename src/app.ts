@@ -27,9 +27,9 @@ async function main(): Promise<void> {
     usuariosMenu.show();
     categoriasMenu.show();
     itensMenu.show();
-    cd_itensMenu.show();
     cidadeMenu.show();
     beneficiariosMenu.show();
+    cd_itensMenu.show();
     console.log('0 - Sair');
 
     input = prompt('Selecione a opção desejada:');
