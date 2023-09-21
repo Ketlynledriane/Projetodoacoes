@@ -6,47 +6,62 @@ import { CidadesMenu } from './views/CidadesMenu';
 import promptSync from 'prompt-sync';
 import { UsuariosMenu } from './views/UsuariosMenu';
 import { BeneficiariosMenu } from './views/BeneficiariosMenu';
-
+import { CDMenu } from './views/CDMenu';
 
 const prompt = promptSync();
 
 async function main(): Promise<void> {
-  await DB.initialize();
-  let usuariosMenu: UsuariosMenu = new UsuariosMenu();
-  let itensMenu: ItesnMenu = new ItesnMenu();
-  let categoriasMenu: CategoriasMenu = new CategoriasMenu();
-  let cd_itensMenu: CD_ItesnMenu = new CD_ItesnMenu();
-  let cidadeMenu: CidadesMenu = new CidadesMenu();
-  let beneficiariosMenu: BeneficiariosMenu = new BeneficiariosMenu();
+    await DB.initialize();
+    let usuariosMenu: UsuariosMenu = new UsuariosMenu();
+    let itensMenu: ItesnMenu = new ItesnMenu();
+    let categoriasMenu: CategoriasMenu = new CategoriasMenu();
+    let cd_itensMenu: CD_ItesnMenu = new CD_ItesnMenu();
+    let cidadeMenu: CidadesMenu = new CidadesMenu();
+    let beneficiariosMenu: BeneficiariosMenu = new BeneficiariosMenu();
+    let cdMenu: CDMenu = new CDMenu();
 
-  let input: string = '';
+    let input: string = '';
 
-  do {
-    console.clear();
+    do {
+        console.clear();
+        console.log("");
+        console.log("[USUÁRIOS]");
+        usuariosMenu.show();
+        console.log("");
+        console.log("[CATEGORIAS]");
+        categoriasMenu.show();
+        console.log("");
+        console.log("[ITENS]");
+        itensMenu.show();
+        console.log("");
+        console.log("[CIDADES]");
+        cidadeMenu.show();
+        console.log("");
+        console.log("[BENEFICIÁRIOS]");
+        beneficiariosMenu.show();
+        console.log("");
+        console.log("[CD_ITENS]");
+        cd_itensMenu.show();
+        console.log("");
+        console.log("[CD]");
+        cdMenu.show();
+        console.log('0 - Sair');
 
-    usuariosMenu.show();
-    categoriasMenu.show();
-    itensMenu.show();
-    cidadeMenu.show();
-    beneficiariosMenu.show();
-    cd_itensMenu.show();
-    console.log('0 - Sair');
+        input = prompt('Selecione a opção desejada: ');
 
-    input = prompt('Selecione a opção desejada:');
+        if (input != '0') {
 
-    if (input != '0') {
-   
-      await itensMenu.execute(input);
-      await categoriasMenu.execute(input);
-      await cd_itensMenu.execute(input);      
-      await usuariosMenu.execute(input);
-      await cidadeMenu.execute(input);
-      await beneficiariosMenu.execute(input);
-      
+            await itensMenu.execute(input);
+            await categoriasMenu.execute(input);
+            await cd_itensMenu.execute(input);
+            await usuariosMenu.execute(input);
+            await cidadeMenu.execute(input);
+            await beneficiariosMenu.execute(input);
+            await cdMenu.execute(input);
 
-      prompt('Pressione enter para continuar');
-    }
-  } while (input != '0');
+            prompt('Pressione enter para continuar');
+        }
+    } while (input != '0');
 }
 
 main();

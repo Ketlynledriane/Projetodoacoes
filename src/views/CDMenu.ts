@@ -38,29 +38,28 @@ export class CDMenu {
 
     private async create(): Promise<void> {
         let nome: string = prompt('Digite o nome do CD: ');
-        
+
         let cidade = null;
         do {
             let cidadeId: number = Number(prompt('Digite o ID da cidade: '));
             cidade = await Cidades.findOneBy({ id: cidadeId });
         } while (cidade == null);
 
-
         let cd: CD = await this.controller.create(nome, cidade);
         console.log(`CD ID #${cd.id} criado com sucesso!`);
     }
 
-    private async edit (): Promise<void> {
+    private async edit(): Promise<void> {
         let id: number = Number(prompt('Qual o ID? '));
         let cd: CD | null = await this.controller.find(id);
-        if(cd){
+        if (cd) {
             cd.nome = prompt(`Descrição: (${cd.nome}) `, cd.nome);
             console.log(`CD ID# ${cd.id} atualizado com sucesso!`);
             await this.controller.save(cd);
         } else {
             console.log('CD não encontrado!');
-        }}
-
+        }
+    }
 
     private async list(): Promise<void> {
         let cd: CD[] | null = await this.controller.list();
@@ -73,6 +72,16 @@ export class CDMenu {
         }));
     }
 
- 
-
+    private async delete(): Promise<void> {
+        let id: number = Number(prompt('Qual o ID? '));
+        let cd: CD | null = await this.controller.find(id);
+        if (cd) {
+            await this.controller.delete(cd);
+            console.log(`CD ID #${id} excluído com sucesso!`);
+        } else {
+            console.log('CD não encontrado!');
+        }
+    }
 }
+
+
