@@ -50,6 +50,18 @@ export class CDMenu {
         console.log(`CD ID #${cd.id} criado com sucesso!`);
     }
 
+    private async edit (): Promise<void> {
+        let id: number = Number(prompt('Qual o ID? '));
+        let cd: CD | null = await this.controller.find(id);
+        if(cd){
+            cd.nome = prompt(`Descrição: (${cd.nome}) `, cd.nome);
+            console.log(`CD ID# ${cd.id} atualizado com sucesso!`);
+            await this.controller.save(cd);
+        } else {
+            console.log('CD não encontrado!');
+        }}
+
+
     private async list(): Promise<void> {
         let cd: CD[] | null = await this.controller.list();
 
@@ -60,5 +72,7 @@ export class CDMenu {
             }
         }));
     }
+
+ 
 
 }
