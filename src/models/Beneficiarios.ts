@@ -16,7 +16,6 @@ export class Beneficiarios extends BaseEntity {
 
   @ManyToOne(() => Cidades, (cidade) => cidade.beneficiario, {
     eager: true,
-    onDelete: "CASCADE"
 })
 @JoinColumn({ name: 'id_cidade' })
 public cidade: Promise <Cidades>;
