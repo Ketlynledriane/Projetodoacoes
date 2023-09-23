@@ -7,6 +7,7 @@ import promptSync from 'prompt-sync';
 import { UsuariosMenu } from './views/UsuariosMenu';
 import { BeneficiariosMenu } from './views/BeneficiariosMenu';
 import { CDMenu } from './views/CDMenu';
+import { MovimentacoesMenu } from './views/MovimentacoesMenu';
 
 const prompt = promptSync();
 
@@ -19,6 +20,7 @@ async function main(): Promise<void> {
     let cidadeMenu: CidadesMenu = new CidadesMenu();
     let beneficiariosMenu: BeneficiariosMenu = new BeneficiariosMenu();
     let cdMenu: CDMenu = new CDMenu();
+    let movimentacoesMenu: MovimentacoesMenu = new MovimentacoesMenu();
 
     let input: string = '';
 
@@ -46,7 +48,10 @@ async function main(): Promise<void> {
         console.log("");
         console.log("[CD]");
         cdMenu.show();
+        console.log("[MOVIMENTAÇÕES]");
+        movimentacoesMenu.show()
         console.log('0 - Sair');
+
 
         input = prompt('Selecione a opção desejada:');
 
@@ -59,6 +64,7 @@ async function main(): Promise<void> {
             await cidadeMenu.execute(input);
             await beneficiariosMenu.execute(input);
             await cdMenu.execute(input);
+            await movimentacoesMenu.execute(input);
 
             prompt('Pressione enter para continuar');
         }

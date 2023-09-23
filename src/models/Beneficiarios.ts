@@ -25,7 +25,7 @@ export class Beneficiarios extends BaseEntity {
     eager: true,
 })
 @JoinColumn({ name: 'id_cidade' })
-public cidade: Promise <Cidades>;
+public cidade: Cidades;
 
 }
 
