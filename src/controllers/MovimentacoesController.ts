@@ -25,5 +25,8 @@ export class MovimentacoesController {
     async list (): Promise<Movimentacao[]> {
         return await Movimentacao.find();
     }
+
+    async delete (movimentacao: Movimentacao) {
+        await Movimentacao.remove(movimentacao);
 }
 
