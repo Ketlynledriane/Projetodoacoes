@@ -12,6 +12,9 @@ export class Beneficiarios extends BaseEntity {
   public nome: string;
 
   @Column()
+  public cpf: string;
+
+  @Column()
   public id_cidade: number;
 
   @ManyToOne(() => Cidades, (cidade) => cidade.beneficiario, {

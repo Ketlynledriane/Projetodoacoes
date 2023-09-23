@@ -2,6 +2,7 @@ import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTab
 import { CD_Itens } from "./CD_Itens";
 import { Cidades } from "./Cidades";
 import { Movimentacao } from "./Movimentacao";
+import { Doador } from "./Doador";
 
 @Entity('cds') 
 export class CD extends BaseEntity {
@@ -19,4 +20,7 @@ export class CD extends BaseEntity {
 
     @OneToMany(() => Movimentacao, (movimentacoes) => movimentacoes.cd)
     public movimentacoes: Movimentacao[];
+
+    @OneToMany(() => Doador, (doadores) => doadores.cd)
+    public doadores: Doador[];
 }
