@@ -28,5 +28,14 @@ export class MovimentacoesController {
 
     async delete (movimentacao: Movimentacao) {
         await Movimentacao.remove(movimentacao);
-}
+    }
 
+    async find(id: number): Promise<Movimentacao | null>{
+        let movimentacao: Movimentacao | null = await Movimentacao.findOneBy({id: id});
+        return movimentacao;
+    }
+
+    async save(movimentacao: Movimentacao): Promise<void>{
+        await movimentacao.save();
+    }
+}
