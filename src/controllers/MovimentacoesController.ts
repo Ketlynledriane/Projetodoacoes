@@ -21,4 +21,9 @@ export class MovimentacoesController {
         await movimentacoes.save();
         return movimentacoes;
     }
+
+    async list (): Promise<Movimentacao[]> {
+        return await Movimentacao.find();
+    }
 }
+
