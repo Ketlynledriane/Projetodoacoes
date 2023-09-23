@@ -25,6 +25,7 @@ async function main(): Promise<void> {
     do {
         console.clear();
         console.log("");
+        console.log("=======================");
         console.log("[USUÁRIOS]");
         usuariosMenu.show();
         console.log("");
@@ -47,7 +48,7 @@ async function main(): Promise<void> {
         cdMenu.show();
         console.log('0 - Sair');
 
-        input = prompt('Selecione a opção desejada: ');
+        input = prompt('Selecione a opção desejada:');
 
         if (input != '0') {
 

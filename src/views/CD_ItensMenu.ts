@@ -64,7 +64,7 @@ export class CD_ItesnMenu {
         await this.controller.save(cd_itens);
     } else {
       console.log('CD_Item não encontrado!');
-    }
+    } 
   }
 
   private async delete (): Promise<void> {
