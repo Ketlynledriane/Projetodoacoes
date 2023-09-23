@@ -17,6 +17,8 @@ export class MovimentacoesController {
             quantidade,
             doador,
             id_beneficiario
-        })
+        });
+        await movimentacoes.save();
+        return movimentacoes;
     }
 }
