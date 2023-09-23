@@ -1,5 +1,6 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from "typeorm";
 import { Cidades } from "./Cidades";
+import { CD } from "./CD";
 
 
 @Entity('beneficiarios')
@@ -16,6 +17,9 @@ export class Beneficiarios extends BaseEntity {
 
   @Column()
   public id_cidade: number;
+
+  @ManyToOne(() => CD, (cd) => cd.beneficiarios)
+  public cd: CD[];
 
   @ManyToOne(() => Cidades, (cidade) => cidade.beneficiario, {
     eager: true,

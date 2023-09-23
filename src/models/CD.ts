@@ -3,6 +3,7 @@ import { CD_Itens } from "./CD_Itens";
 import { Cidades } from "./Cidades";
 import { Movimentacao } from "./Movimentacao";
 import { Doador } from "./Doador";
+import { Beneficiarios } from "./Beneficiarios";
 
 @Entity('cds') 
 export class CD extends BaseEntity {
@@ -23,4 +24,7 @@ export class CD extends BaseEntity {
 
     @OneToMany(() => Doador, (doadores) => doadores.cd)
     public doadores: Doador[];
+
+    @OneToMany(() => Beneficiarios, (beneficiarios) => beneficiarios.cd)
+    public beneficiarios: Beneficiarios[];
 }
