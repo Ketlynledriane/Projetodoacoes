@@ -9,12 +9,13 @@ export class BeneficiariosControllers {
         return await Beneficiarios.find();
     }
 
-    async create (nome: string, id_cidade: number) {
+    async create (nome: string, id_cidade: number, cpf: string) {
 
         let beneficiario: Beneficiarios = Beneficiarios.create({
             nome,
             id_cidade,
-           });
+            cpf
+        });
         await beneficiario.save();
         return beneficiario;
     }

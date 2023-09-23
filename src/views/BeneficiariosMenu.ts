@@ -43,6 +43,7 @@ export class BeneficiariosMenu {
       return {
         id: beneficiario.id,
         nome: beneficiario.nome,
+        cpf: beneficiario.cpf,
         cidade: beneficiario.id_cidade
       }
     }));
@@ -50,8 +51,9 @@ export class BeneficiariosMenu {
 
   private async create (): Promise<void> {
     let nome: string = prompt('Digite o nome do beneficiario: ');
-    let id_cidade: number = Number (prompt ('Digite o Id da cidade:'))
-    let beneficiario: Beneficiarios = await this.controller.create(nome, id_cidade);
+    let cpf: string = prompt('Digite o número do cpf: ');
+    let id_cidade: number = Number (prompt ('Digite o Id da cidade:'));
+    let beneficiario: Beneficiarios = await this.controller.create(nome, id_cidade, cpf);
     console.log(`Beneficiaio ID #${beneficiario.id} criado com sucesso!`);
   }
 
@@ -60,6 +62,7 @@ export class BeneficiariosMenu {
     let beneficiario: Beneficiarios | null = await this.controller.find(id);
     if(beneficiario){
         beneficiario.nome = prompt(`Descrição: (${beneficiario.nome}) `, beneficiario.nome);
+        beneficiario.cpf = prompt(`Descrição: (${beneficiario.cpf}) `, beneficiario.cpf);
         beneficiario.id_cidade = Number (prompt(`Cidade (${beneficiario.id_cidade}): `, String(beneficiario.id_cidade)));
         console.log(`Beneficiario ID# ${beneficiario.id} atualizado com sucesso!`);
         await this.controller.save(beneficiario);
