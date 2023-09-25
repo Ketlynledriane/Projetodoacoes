@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-import { CategoriasController } from '../controllers/Categoriascontroller';
-=======
->>>>>>> 5f593259cde633dcb341fde22761501589371cb9
 import { Itens } from '../models/Itens';
 import { ItensController } from '../controllers/ItensController';
 import promptSync from 'prompt-sync';
