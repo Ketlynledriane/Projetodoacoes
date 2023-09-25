@@ -19,7 +19,7 @@ export class UsuariosMenu {
         console.log('4 - Excluir usuario');
         console.log('0 - Voltar ao menu anterior');
         console.log("");
-        let escolha = prompt('Opção escolhida: ')
+        let escolha = prompt('Digite a opção escolhida: ')
         await this.execute(escolha);
     }
 
@@ -39,11 +39,11 @@ export class UsuariosMenu {
                 break;
             case '0':
                 console.log('Voltando...');
-                await this.show();
                 break;
 
             default:
                 console.log('Valor inválido!');
+                await this.show();
                 break;
         }
     }
