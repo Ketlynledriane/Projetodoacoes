@@ -1,4 +1,4 @@
-import { CategoriasController } from '../controllers/CategoriasController';
+import { CategoriasController } from '../controllers/Categoriascontroller';
 import { Itens } from '../models/Itens';
 import { ItensController } from '../controllers/ItensController'; 
 import promptSync from 'prompt-sync';

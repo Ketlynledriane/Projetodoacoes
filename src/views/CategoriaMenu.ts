@@ -1,5 +1,5 @@
 import { Categorias } from '../models/Categorias';
-import { CategoriasController } from '../controllers/CategoriasController';
+import { CategoriasController } from '../controllers/Categoriascontroller';
 import promptSync from 'prompt-sync';
 const prompt = promptSync();
 
