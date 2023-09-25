@@ -19,7 +19,7 @@ export class MovimentacoesMenu {
     }
 
     public async show() {
-        console.log('1 - Receber doação do doador');
+        console.log('1 - Receber doação');
         console.log('2 - Entregar doação ao beneficiário');
         console.log('3 - Relatório de doações recebidas');
         console.log('4 - Relatório de doações entregues');
