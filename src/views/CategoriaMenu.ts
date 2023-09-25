@@ -65,6 +65,9 @@ export class CategoriasMenu {
     let descricao: string = prompt('Digite a descrição: ');
     let categoria: Categorias = await this.controller.create(descricao);
     console.log(`Categoria ID #${categoria.id} criada com sucesso!`);
+
+    prompt("Aperte ENTER para continuar...");
+    await this.show();
   }
 
   private async edit(): Promise<void> {
