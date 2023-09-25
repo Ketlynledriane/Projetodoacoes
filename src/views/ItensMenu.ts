@@ -1,6 +1,7 @@
 import { Itens } from '../models/Itens';
 import { ItensController } from '../controllers/ItensController';
 import promptSync from 'prompt-sync';
+import { Categorias } from '../models/Categorias';
 const prompt = promptSync();
 
 export class ItesnMenu {
@@ -63,8 +64,23 @@ export class ItesnMenu {
 
   private async create(): Promise<void> {
     let descricao: string = prompt('Digite a descrição do item: ');
-    let id_categoria: number = Number(prompt('Digite o ID da categoria: '));
-    let itens: Itens = await this.controller.create(descricao, id_categoria);
+
+
+    let categoria = null;
+    do {
+      let categorias = await Categorias.find();
+        console.table(categorias.map(function(cat){
+          return {
+            id: cat.id,
+            descricao: cat.descricao
+          }
+        }))
+
+        let categoriaId: number = Number(prompt('Digite o ID da categoria: '));
+        categoria = await Categorias.findOneBy({ id: categoriaId });
+    } while (categoria == null);
+
+    let itens: Itens = await this.controller.create(descricao, categoria.id);
     console.log(`Item ID #${itens.id} criado com sucesso!`);
 
     prompt("Aperte ENTER para continuar...");
