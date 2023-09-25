@@ -77,8 +77,11 @@ export class UsuariosMenu {
         if (usuario) {
             usuario.nome = prompt(`Nome: (${usuario.nome}) `, usuario.nome);
             usuario.email = prompt(`Email: (${usuario.email}) `, usuario.email);
-            usuario.senha = prompt(`Senha: `);
-            this.controller.save(usuario);
+            let senha = prompt(`Senha: `);
+            if (senha) {
+                usuario.senha = senha;
+            }
+            await this.controller.save(usuario);
             console.log(`Usuario ID# ${usuario.id} atualizado com sucesso!`);
         } else {
             console.log('Usuário não encontrado!')

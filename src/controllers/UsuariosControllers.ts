@@ -31,7 +31,6 @@ export class UsuariosControllers {
     }
 
     async save(usuario: Usuarios): Promise<void>{
-        usuario.senha = (usuario.senha);
         await usuario.save();
     }
     
