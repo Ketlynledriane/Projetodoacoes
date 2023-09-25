@@ -1,5 +1,6 @@
 import { BaseEntity, Column, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { CD } from "./CD";
+import { Doador } from "./Doador";
 
 @Entity('movimentacoes')
 export class Movimentacao extends BaseEntity {
@@ -20,12 +21,12 @@ export class Movimentacao extends BaseEntity {
     @Column()
     public quantidade: number;
 
-    @Column()
-    public doador: string;
+    @ManyToOne(() => Doador, (doador) => doador.movimentacoes,{nullable: true})
+    public doador: Doador;
 
-    @Column()
+    @Column({nullable: true})
     public id_beneficiario: number;
 
     @ManyToOne(() => CD, (cd) => cd.movimentacoes)
-    public cd: CD[];
+    public cd: CD;
 }

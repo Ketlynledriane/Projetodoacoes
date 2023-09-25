@@ -16,7 +16,7 @@ export class CD extends BaseEntity {
     @ManyToOne(() => Cidades, (cidade) => cidade.cds)
     public cidade: Cidades;
     
-    @OneToMany(() => CD_Itens, (cd_itens) => cd_itens.cds)
+    @OneToMany(() => CD_Itens, (cd_itens) => cd_itens.cd)
     public cd_itens: CD_Itens[];
 
     @OneToMany(() => Movimentacao, (movimentacoes) => movimentacoes.cd)

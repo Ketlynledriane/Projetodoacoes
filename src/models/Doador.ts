@@ -1,5 +1,7 @@
-import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { CD } from "./CD";
+import { Cidades } from "./Cidades";
+import { Movimentacao } from "./Movimentacao";
 
 @Entity('doador')
 export class Doador extends BaseEntity {
@@ -12,9 +14,12 @@ export class Doador extends BaseEntity {
     @Column()
     public cpf: string;
 
-    @Column()
-    public cidade: string;
+    @ManyToOne(() => Cidades, (cidade) => cidade.doadores)
+    public cidade: Cidades;
 
     @ManyToOne(() => CD, (cd) => cd.doadores)
-    public cd: CD[];
+    public cd: CD;
+
+    @OneToMany(() => Movimentacao, (movimentacoes) => movimentacoes.cd)
+    public movimentacoes: Movimentacao[];
 }
