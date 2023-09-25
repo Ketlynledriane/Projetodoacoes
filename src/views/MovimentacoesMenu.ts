@@ -19,8 +19,8 @@ export class MovimentacoesMenu {
     }
 
     public async show() {
-        console.log('1 - Efetuar doação');
-        console.log('2 - Receber doação');
+        console.log('1 - Receber doação do doador');
+        console.log('2 - Entregar doação ao beneficiário');
         console.log('3 - Relatório de doações recebidas');
         console.log('4 - Relatório de doações entregues');
         console.log('0 - Voltar ao menu anterior');
@@ -56,7 +56,7 @@ export class MovimentacoesMenu {
 
     private async doar() {
         let doador = null;
-        let anonimo = prompt('Deseja realizar uma doação anônima? Digite [1] para sim ou [2] se deseja se identificar: ')
+        let anonimo = prompt('Deseja realizar uma doação anônima? Digite [1] para sim ou [2] se o doador deseja ser identificado: ')
         if (anonimo == '2') {
             do {
                 console.table(await Doador.find())
@@ -187,8 +187,7 @@ export class MovimentacoesMenu {
         let quantidade = null;
         do {
             quantidade = Number(prompt('Digite a quantidade do item: '));
-        } while (!quantidade || quantidade >= 0);
-
+        } while (!quantidade || quantidade <= 0);
 
         let cdItem = await CD_Itens.findOneBy({ id_cd: cd.id, id_itens: item.id });
         if (cdItem) {
@@ -235,7 +234,7 @@ export class MovimentacoesMenu {
     }
 
     public async relatorioRetirada() {
-        console.table((await Movimentacao.findBy({ tipo: ""})).map(function (movimentacao) {
+        console.table((await Movimentacao.findBy({ tipo: "retirada"})).map(function (movimentacao) {
             return {
                 id: movimentacao.id,
                 beneficiario: movimentacao.beneficiario?.nome,
