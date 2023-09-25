@@ -1,5 +1,7 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from "typeorm";
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToMany } from "typeorm";
 import { Cidades } from "./Cidades";
+import { CD } from "./CD";
+import { Movimentacao } from "./Movimentacao";
 
 
 @Entity('beneficiarios')
@@ -12,14 +14,18 @@ export class Beneficiarios extends BaseEntity {
   public nome: string;
 
   @Column()
+  public cpf: string;
+
+  @Column()
   public id_cidade: number;
 
   @ManyToOne(() => Cidades, (cidade) => cidade.beneficiario, {
     eager: true,
-    onDelete: "CASCADE"
-})
-@JoinColumn({ name: 'id_cidade' })
-public cidade: Promise <Cidades>;
+  })
+  @JoinColumn({ name: 'id_cidade' })
+  public cidade: Cidades;
 
+  @OneToMany(() => Movimentacao, (movimentacoes) => movimentacoes.beneficiario)
+  public movimentacoes: Movimentacao[];
 }
 

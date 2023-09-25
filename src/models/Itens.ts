@@ -14,13 +14,12 @@ export class Itens extends BaseEntity {
     public id_categoria: number;
 
     @ManyToOne(() => Categorias, (categoria) => categoria.itens, {
-        eager: true,
-        onDelete: "CASCADE"
+    eager: true
     })
     @JoinColumn({ name: 'id_categoria' })
-    public categoria: Promise <Categorias>;
+    public categoria: Categorias;
 
-    @OneToMany(() => CD_Itens, (cd_itens) => cd_itens.itens)
+    @OneToMany(() => CD_Itens, (cd_itens) => cd_itens.id_itens)
     public cd_itens: CD_Itens[];
     
 }
