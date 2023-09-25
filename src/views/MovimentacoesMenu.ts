@@ -56,7 +56,7 @@ export class MovimentacoesMenu {
 
     private async doar() {
         let doador = null;
-        let anonimo = prompt('Deseja realizar uma doação anônima? Digite [1] para sim ou [2] se deseja se identificar')
+        let anonimo = prompt('Deseja realizar uma doação anônima? Digite [1] para sim ou [2] se deseja se identificar: ')
         if (anonimo == '2') {
             do {
                 console.table(await Doador.find())
