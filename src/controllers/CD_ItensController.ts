@@ -6,9 +6,10 @@ export class CD_ItensController {
         return await CD_Itens.find();
     }
 
-    async create (id_itens: number, id_cd: number) {
+    async create (id_itens: number, id_cd: number, estoque: number) {
         let cd_itens: CD_Itens = CD_Itens.create({
             id_itens, id_cd,
+            estoque
         });
         await cd_itens.save();
         return cd_itens;

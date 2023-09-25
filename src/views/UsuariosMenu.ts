@@ -12,11 +12,15 @@ export class UsuariosMenu {
         this.controller = new UsuariosControllers();
     }
 
-    public show(): void {
+    public async show() {
         console.log('1 - Cadastrar novo usuario');
         console.log('2 - Editar usuario');
         console.log('3 - Listar usuarios');
         console.log('4 - Excluir usuario');
+        console.log('0 - Voltar ao menu anterior');
+        console.log("");
+        let escolha = prompt('Opção escolhida: ')
+        await this.execute(escolha);
     }
 
     public async execute(input: string): Promise<void> {
@@ -33,6 +37,14 @@ export class UsuariosMenu {
             case '4':
                 await this.delete();
                 break;
+            case '0':
+                console.log('Voltando...');
+                await this.show();
+                break;
+
+            default:
+                console.log('Valor inválido!');
+                break;
         }
     }
 
@@ -45,6 +57,8 @@ export class UsuariosMenu {
                 email: usuario.email,
             }
         }));
+        prompt("Aperte ENTER para continuar...");
+        await this.show();
     }
 
     private async create(): Promise<void> {
@@ -53,6 +67,8 @@ export class UsuariosMenu {
         let senha: string = prompt('Senha: ');
         let usuario: Usuarios = await this.controller.create(nome, email, senha);
         console.log(`Usuario ID #${usuario.id} criado com sucesso!`);
+        prompt("Aperte ENTER para continuar...");
+        await this.show();
     }
 
     private async edit(): Promise<void> {
@@ -67,6 +83,8 @@ export class UsuariosMenu {
         } else {
             console.log('Usuário não encontrado!')
         }
+        prompt("Aperte ENTER para continuar...");
+        await this.show();
     }
 
     private async delete(): Promise<void> {
@@ -78,5 +96,7 @@ export class UsuariosMenu {
         } else {
             console.log('Usuario não encontrado!');
         }
+        prompt("Aperte ENTER para continuar...");
+        await this.show();
     }
 }

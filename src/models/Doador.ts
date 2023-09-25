@@ -14,12 +14,10 @@ export class Doador extends BaseEntity {
     @Column()
     public cpf: string;
 
-    @ManyToOne(() => Cidades, (cidade) => cidade.doadores)
+    @ManyToOne(() => Cidades, (cidade) => cidade.doadores, {
+        eager: true})
     public cidade: Cidades;
 
-    @ManyToOne(() => CD, (cd) => cd.doadores)
-    public cd: CD;
-
-    @OneToMany(() => Movimentacao, (movimentacoes) => movimentacoes.cd)
+    @OneToMany(() => Movimentacao, (movimentacoes) => movimentacoes.doador)
     public movimentacoes: Movimentacao[];
 }

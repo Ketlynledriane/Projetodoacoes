@@ -12,26 +12,38 @@ export class CDMenu {
         this.controller = new CDControllers();
     }
 
-    public show(): void {
-        console.log('25 - Cadastrar novo CD');
-        console.log('26 - Editar CD');
-        console.log('27 - Listar CD');
-        console.log('28 - Excluir CD');
+    public async show() {
+        console.log('1 - Cadastrar novo CD');
+        console.log('2 - Editar CD');
+        console.log('3 - Listar CD');
+        console.log('4 - Excluir CD');
+        console.log('0 - Voltar ao menu anterior')
+        console.log("");
+        let escolha = prompt('Digite a opção escolhida: ')
+        await this.execute(escolha);
     }
 
     public async execute(input: string): Promise<void> {
         switch (input) {
-            case '25':
+            case '1':
                 await this.create();
                 break;
-            case '26':
+            case '2':
                 await this.edit();
                 break;
-            case '27':
+            case '3':
                 await this.list();
                 break;
-            case '28':
+            case '4':
                 await this.delete();
+                break;
+            case '0':
+                console.log('Voltando...');
+                break;
+
+            default:
+                console.log('Valor inválido!');
+                await this.show();
                 break;
         }
     }
@@ -47,6 +59,9 @@ export class CDMenu {
 
         let cd: CD = await this.controller.create(nome, cidade);
         console.log(`CD ID #${cd.id} criado com sucesso!`);
+
+        prompt("Aperte ENTER para continuar...");
+        await this.show();
     }
 
     private async edit(): Promise<void> {
@@ -59,6 +74,8 @@ export class CDMenu {
         } else {
             console.log('CD não encontrado!');
         }
+        prompt("Aperte ENTER para continuar...");
+        await this.show();
     }
 
     private async list(): Promise<void> {
@@ -70,6 +87,8 @@ export class CDMenu {
                 descricao: cd.nome,
             }
         }));
+        prompt("Aperte ENTER para continuar...");
+        await this.show();
     }
 
     private async delete(): Promise<void> {
@@ -81,6 +100,8 @@ export class CDMenu {
         } else {
             console.log('CD não encontrado!');
         }
+        prompt("Aperte ENTER para continuar...");
+        await this.show();
     }
 }
 

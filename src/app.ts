@@ -22,53 +22,66 @@ async function main(): Promise<void> {
     let cdMenu: CDMenu = new CDMenu();
     let movimentacoesMenu: MovimentacoesMenu = new MovimentacoesMenu();
 
-    let input: string = '';
+    let escolha: number = 0;
 
     do {
         console.clear();
-        console.log("");
-        console.log("=======================");
-        console.log("[USUÁRIOS]");
-        usuariosMenu.show();
-        console.log("");
-        console.log("[CATEGORIAS]");
-        categoriasMenu.show();
-        console.log("");
-        console.log("[ITENS]");
-        itensMenu.show();
-        console.log("");
-        console.log("[CIDADES]");
-        cidadeMenu.show();
-        console.log("");
-        console.log("[BENEFICIÁRIOS]");
-        beneficiariosMenu.show();
-        console.log("");
-        console.log("[CD_ITENS]");
-        cd_itensMenu.show();
-        console.log("");
-        console.log("[CD]");
-        cdMenu.show();
-        console.log("[MOVIMENTAÇÕES]");
-        movimentacoesMenu.show()
+        console.log("Bem-vindo ao sistema de doações DOE CRIE_TI. Escolha uma opção abaixo: ")
+        
+        console.log("1 - USUÁRIOS");
+        
+        console.log("2 - CIDADES");
+        
+        console.log("3 - CATEGORIAS");
+        
+        console.log("4 - ITENS");
+        
+        console.log("5 - ESTOQUE");
+        
+        console.log("6 - BENEFICIÁRIOS");
+        
+        console.log("7 - CD");
+        
+        console.log("8 - DOAÇÕES");
+        
         console.log('0 - Sair');
 
-
-        input = prompt('Selecione a opção desejada:');
-
-        if (input != '0') {
-
-            await itensMenu.execute(input);
-            await categoriasMenu.execute(input);
-            await cd_itensMenu.execute(input);
-            await usuariosMenu.execute(input);
-            await cidadeMenu.execute(input);
-            await beneficiariosMenu.execute(input);
-            await cdMenu.execute(input);
-            await movimentacoesMenu.execute(input);
-
-            prompt('Pressione enter para continuar');
-        }
-    } while (input != '0');
+        escolha = Number(prompt("Digite a opção desejada: "));
+        console.log("");
+        
+        switch (escolha) {
+            case 1:
+                await usuariosMenu.show()
+                break;
+            case 2:
+                await cidadeMenu.show();
+                break;
+            case 3:
+                await categoriasMenu.show();
+                break;
+            case 4:
+                await itensMenu.show();
+                break;
+            case 5:
+                await cd_itensMenu.show();
+                break;
+            case 6:
+                await beneficiariosMenu.show();
+                break;
+            case 7:
+                await cdMenu.show();
+                break;
+            case 8:
+                await movimentacoesMenu.show()
+                break;
+            case 0:
+                console.log('Saindo do sistema...');
+                break;
+            default:
+                console.log('Valor inválido!');
+                break;
+            }
+    } while (escolha != 0) 
 }
 
 main();

@@ -13,18 +13,13 @@ export class CD extends BaseEntity {
     @Column()
     public nome: string;
 
-    @ManyToOne(() => Cidades, (cidade) => cidade.cds)
+    @ManyToOne(() => Cidades, (cidade) => cidade.cds, {
+        eager: true})
     public cidade: Cidades;
     
-    @OneToMany(() => CD_Itens, (cd_itens) => cd_itens.cd)
+    @OneToMany(() => CD_Itens, (cd_itens) => cd_itens.id_cd)
     public cd_itens: CD_Itens[];
 
     @OneToMany(() => Movimentacao, (movimentacoes) => movimentacoes.cd)
     public movimentacoes: Movimentacao[];
-
-    @OneToMany(() => Doador, (doadores) => doadores.cd)
-    public doadores: Doador[];
-
-    @OneToMany(() => Beneficiarios, (beneficiarios) => beneficiarios.cd)
-    public beneficiarios: Beneficiarios[];
 }
