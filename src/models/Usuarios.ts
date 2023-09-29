@@ -12,6 +12,5 @@ export class Usuarios extends BaseEntity {
     public email: string;
 
     @Column()
-    public senha: string;
-    
+    public senha: string;  
 }
