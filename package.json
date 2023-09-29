@@ -19,6 +19,7 @@
   "dependencies": {
     "@types/prompt-sync": "^4.2.0",
     "dotenv": "^16.3.1",
+    "md5": "^2.3.0",
     "pg": "^8.11.3",
     "prompt-sync": "^4.2.0",
     "reflect-metadata": "^0.1.13",

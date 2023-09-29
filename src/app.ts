@@ -8,11 +8,12 @@ import { UsuariosMenu } from './views/UsuariosMenu';
 import { BeneficiariosMenu } from './views/BeneficiariosMenu';
 import { CDMenu } from './views/CDMenu';
 import { MovimentacoesMenu } from './views/MovimentacoesMenu';
+import { LoginController } from './controllers/LoginControllers';
+import { Usuarios } from './models/Usuarios';
 
 const prompt = promptSync();
 
-async function main(): Promise<void> {
-    await DB.initialize();
+async function main(usuario: Usuarios): Promise<void> {
     let usuariosMenu: UsuariosMenu = new UsuariosMenu();
     let itensMenu: ItesnMenu = new ItesnMenu();
     let categoriasMenu: CategoriasMenu = new CategoriasMenu();
@@ -27,28 +28,28 @@ async function main(): Promise<void> {
     do {
         console.clear();
         console.log("Bem-vindo ao sistema de doações DOE CRIE_TI. Escolha uma opção abaixo: ")
-        
+
         console.log("1 - USUÁRIOS");
-        
+
         console.log("2 - CIDADES");
-        
+
         console.log("3 - CATEGORIAS");
-        
+
         console.log("4 - ITENS");
-        
+
         console.log("5 - ESTOQUE");
-        
+
         console.log("6 - BENEFICIÁRIOS");
-        
+
         console.log("7 - CD");
-        
+
         console.log("8 - DOAÇÕES");
-        
+
         console.log('0 - Sair');
 
         escolha = Number(prompt("Digite a opção desejada: "));
         console.log("");
-        
+
         switch (escolha) {
             case 1:
                 await usuariosMenu.show()
@@ -80,8 +81,32 @@ async function main(): Promise<void> {
             default:
                 console.log('Valor inválido!');
                 break;
-            }
-    } while (escolha != 0) 
+        }
+    } while (escolha != 0)
 }
 
-main();
+async function init() {
+    await DB.initialize();
+    login();
+}
+async function login() {
+    let loginController = new LoginController();
+    console.log('Digite sua opção: ');
+    console.log('[1] - Login');
+    console.log('[2] - Sair');
+    let op: string = prompt('');
+    if (op == '1') {
+        let email: string = prompt('Digite seu email: ');
+        let senha: string = prompt('Digite sua senha: ');
+        let usuarioLogado = await loginController.procurarUsuario(email, senha);
+        if (usuarioLogado) {
+            main(usuarioLogado);
+        } else {
+            console.log('Email ou senha incorretos!');
+            await login();
+        }
+    } else {
+        console.log('Saindo');
+    }
+}
+init();
