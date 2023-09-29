@@ -1,5 +1,6 @@
 import { Usuarios } from "../models/Usuarios";
 import promptSync from 'prompt-sync';
+let md5 = require('md5');
 
 const prompt = promptSync();
 
@@ -10,7 +11,7 @@ export class UsuariosControllers {
     }
 
     async create (nome: string, email:string, senha:string) {
-        senha = senha;
+        senha = md5(senha);
 
         let usuario: Usuarios = Usuarios.create({
             nome,
@@ -31,6 +32,7 @@ export class UsuariosControllers {
     }
 
     async save(usuario: Usuarios): Promise<void>{
+        usuario.senha = md5(usuario.senha);
         await usuario.save();
     }
     
