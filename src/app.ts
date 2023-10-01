@@ -1,5 +1,15 @@
-
 import DB from './db';
+import server from './server';
+
+async function main(): Promise<void> {
+    await DB.initialize();
+
+    server.start();
+}
+
+main();
+
+/*
 import { ItesnMenu } from './views/ItensMenu';
 import { CategoriasMenu } from './views/CategoriaMenu';
 import { CD_ItesnMenu } from './views/CD_ItensMenu';
@@ -110,4 +120,4 @@ async function login() {
         console.log('Saindo');
     }
 }
-init();
+init();*/
