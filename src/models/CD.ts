@@ -12,6 +12,9 @@ export class CD extends BaseEntity {
 
     @Column()
     public nome: string;
+    
+    @Column()
+    public id_cidade: number;
 
     @ManyToOne(() => Cidades, (cidade) => cidade.cds, {
         eager: true})

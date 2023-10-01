@@ -1,4 +1,4 @@
-import { CDControllers } from "../controllers/CDControllers";
+/*import { CDControllers } from "../controllers/CDControllers";
 import { CD } from "../models/CD";
 import PromptSync from "prompt-sync";
 import { Cidades } from "../models/Cidades";
@@ -104,5 +104,5 @@ export class CDMenu {
         await this.show();
     }
 }
-
+*/
 
