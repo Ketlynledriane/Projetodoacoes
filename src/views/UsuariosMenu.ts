@@ -1,4 +1,4 @@
-import { UsuariosControllers } from '../controllers/UsuariosControllers';
+/*import { UsuariosControllers } from '../controllers/UsuariosControllers';
 import { Usuarios } from '../models/Usuarios';
 import promptSync from 'prompt-sync';
 
@@ -102,4 +102,4 @@ export class UsuariosMenu {
         prompt("Aperte ENTER para continuar...");
         await this.show();
     }
-}
+}*/

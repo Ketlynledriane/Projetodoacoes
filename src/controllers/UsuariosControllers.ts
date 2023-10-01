@@ -1,39 +1,57 @@
 import { Usuarios } from "../models/Usuarios";
-import promptSync from 'prompt-sync';
+import { Request, Response } from 'express';
+import { ILike } from "typeorm";
 let md5 = require('md5');
-
-const prompt = promptSync();
 
 export class UsuariosControllers {
 
-    async list (): Promise<Usuarios[]> {
-        return await Usuarios.find();
-    }
-
-    async create (nome: string, email:string, senha:string) {
-        senha = md5(senha);
-
-        let usuario: Usuarios = Usuarios.create({
-            nome,
-            senha,
-            email,
+    async list (req: Request, res: Response): Promise<Response> {
+        let nome = req.query.nome;
+                
+        let users: Usuarios[] = await Usuarios.findBy({
+            nome: nome ? ILike(`%${nome}%`) : undefined
         });
-        await usuario.save();
-        return usuario;
+
+        return res.status(200).json(users);
     }
+
+    async find (req: Request, res: Response): Promise<Response> {
+      let usuario: Usuarios = res.locals.usuario;
+
+      return res.status(200).json(usuario);
+    }
+
+    async create (req: Request, res: Response): Promise<Response> {
+        let body = req.body;
+       
+        let usuario: Usuarios = await Usuarios.create({
+            nome: body.nome,
+            email: body.email,
+            senha: body.senha,
+        }).save();
     
-    async delete (usuario: Usuarios) {
-        await Usuarios.remove(usuario);
+        return res.status(200).json(usuario);
     }
 
-    async find(id: number): Promise<Usuarios | null>{
-        let usuario: Usuarios | null = await Usuarios.findOneBy({id: id});
-        return usuario;
-    }
-
-    async save(usuario: Usuarios): Promise<void>{
-        usuario.senha = md5(usuario.senha);
+    async update (req: Request, res: Response): Promise<Response> {
+        let body = req.body;
+        let usuario: Usuarios = res.locals.usuario;
+    
+        usuario.nome = body.nome,
+        usuario.email = body.email,
+        usuario.senha = body.senha, 
         await usuario.save();
+    
+        return res.status(200).json(usuario);
+    } 
+
+    async delete (req: Request, res: Response): Promise<Response> {
+    let usuario: Usuarios = res.locals.usuario;
+
+    usuario.remove();
+    
+    return res.status(200).json();
+
     }
     
 }
