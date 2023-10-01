@@ -1,11 +1,12 @@
 import { NextFunction, Router, Request, Response } from "express";
-import { CategoriasController } from "../controllers/Categoriascontroller";
+import { ItensController } from "../controllers/ItensController";
+import { Itens } from "../models/Itens";
 import * as yup from 'yup';
-import { Categorias } from "../models/Categorias";
 
 async function validarPayload (req: Request, res: Response, next: NextFunction): Promise<Response|void>{
     let schema = yup.object({
         descricao: yup.string().min(3).max(255).required(),
+        id_categoria: yup.number().required(),
     });
 
     let payload = req.body;
@@ -23,28 +24,28 @@ async function validarPayload (req: Request, res: Response, next: NextFunction):
 
 async function validarSeExiste (req: Request, res: Response, next: NextFunction): Promise<Response|void>{
     let id = Number (req.params.id);
-    let categoria: Categorias|null = await Categorias.findOneBy ({ id });
-    if ( ! categoria) {
-        return res.status(422).json({error: 'Categoria não encontrado!' });
+    let item: Itens|null = await Itens.findOneBy ({ id });
+    if ( ! item) {
+        return res.status(422).json({error: 'Item não encontrado!' });
     }
     
-    res.locals.categoria = categoria;
+    res.locals.item = item;
     
     return next();
 }
 
 let router : Router = Router();
 
-let categoriaController: CategoriasController = new CategoriasController();
+let itemController: ItensController = new ItensController();
 
-router.get('/categorias', categoriaController.list);
+router.get('/itens', itemController.list);
 
-router.post('/categorias', validarPayload, categoriaController.create);
+router.post('/itens', validarPayload, itemController.create);
 
-router.put('/categorias/:id', validarSeExiste, categoriaController.update);
+router.put('/itens/:id', validarSeExiste, itemController.update);
 
-router.delete('/categorias/:id', categoriaController.delete);
+router.delete('/itens/:id', itemController.delete);
 
-router.get('/categorias/:id', validarSeExiste, categoriaController.find);
+router.get('/itens/:id', validarSeExiste, itemController.find);
 
 export default router;

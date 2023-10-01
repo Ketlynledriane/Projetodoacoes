@@ -1,27 +1,53 @@
 import { Itens } from "../models/Itens";
+import { ILike } from "typeorm";
+import { Request, Response} from 'express';
 
 export class ItensController {
 
-    async list (): Promise<Itens[] | null> {
-        return await Itens.find();
+    async list (req: Request, res: Response): Promise<Response> {
+        let descricao = req.query.descricao;
+                
+        let itens: Itens[] = await Itens.findBy({
+            descricao: descricao ? ILike(`%${descricao}%`) : undefined
+        });
+
+        return res.status(200).json(itens);
     }
 
-    async create (descricao: string, id_categoria: number) {
-        let itens: Itens = Itens.create({ descricao, id_categoria});
-        await itens.save();
-        return itens;
+    async find (req: Request, res: Response): Promise<Response> {
+      let item: Itens = res.locals.item;
+
+      return res.status(200).json(item);
     }
 
-    async delete (itens: Itens) {
-        await Itens.remove(itens)
+    async create (req: Request, res: Response): Promise<Response> {
+        let body = req.body;
+       
+        let item: Itens = await Itens.create({
+            descricao: body.descricao,
+            id_categoria: body.id_categoria,
+        }).save();
+    
+        return res.status(200).json(item);
     }
 
-    async find(id: number): Promise<Itens | null>{
-        let itens: |Itens | null = await Itens.findOneBy({id: id});
-        return itens;
-    }
+    async update (req: Request, res: Response): Promise<Response> {
+        let body = req.body;
+        let item: Itens = res.locals.item;
 
-    async save(itens: Itens): Promise<void>{
-        await itens.save();
+        item.descricao = body.descricao,
+        item.id_categoria = body.id_categoria,
+        await item.save();
+    
+        return res.status(200).json(item);
+    } 
+
+    async delete (req: Request, res: Response): Promise<Response> {
+    let item: Itens = res.locals.item;
+
+    item.remove();
+    
+    return res.status(200).json();
+
     }
 }

@@ -1,4 +1,4 @@
-import { Itens } from '../models/Itens';
+/*import { Itens } from '../models/Itens';
 import { ItensController } from '../controllers/ItensController';
 import promptSync from 'prompt-sync';
 import { Categorias } from '../models/Categorias';
@@ -117,4 +117,4 @@ export class ItesnMenu {
     await this.show();
   }
 
-}
+}*/
