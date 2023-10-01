@@ -1,4 +1,4 @@
-import { CD_Itens } from '../models/CD_Itens';
+/*import { CD_Itens } from '../models/CD_Itens';
 import { CD_ItensController } from '../controllers/CD_ItensController';
 import promptSync from 'prompt-sync';
 import { Itens } from '../models/Itens';
@@ -50,4 +50,4 @@ export class CD_ItesnMenu {
     prompt("Aperte ENTER para continuar...");
     await this.show();
   }
-}
+}*/

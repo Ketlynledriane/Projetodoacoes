@@ -3,6 +3,7 @@ import cors from 'cors';
 import categoriasRoutes from './routes/categorias'
 import itensRoutes from './routes/itens'
 import cdRoutes from './routes/cd'
+import cd_itemRoutes from './routes/cd_item'
 
 let server: Express = express();
 let port: Number = Number(process.env.SERVER_PORT || 3000);
@@ -17,7 +18,8 @@ server.use((req: Request, res: Response, next: NextFunction) => {
 
 server.use(categoriasRoutes);
 server.use(itensRoutes);
-server.use(cdRoutes)
+server.use(cdRoutes);
+server.use(cd_itemRoutes);
 
 export default {
     start () {
