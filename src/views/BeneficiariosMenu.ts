@@ -1,4 +1,4 @@
-import { Beneficiarios } from '../models/Beneficiarios';
+/*import { Beneficiarios } from '../models/Beneficiarios';
 import { BeneficiariosControllers } from '../controllers/BeneficiariosController';
 import promptSync from 'prompt-sync';
 
@@ -104,5 +104,5 @@ export class BeneficiariosMenu {
     prompt("Aperte ENTER para continuar...");
     await this.show();
   }
-}
+}*/
     

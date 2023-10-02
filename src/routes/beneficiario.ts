@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import { BeneficiariosControllers } from '../src/controllers/BeneficiariosController';
+import { BeneficiariosControllers } from '../controllers/BeneficiariosController';
 import * as yup from 'yup';
-import { Beneficiarios } from '../src/models/Beneficiarios';
+import { Beneficiarios } from '../models/Beneficiarios';
 
 async function validarPayload (req: Request, res: Response, next: NextFunction): Promise<Response|void>{
   let schema = yup.object({
