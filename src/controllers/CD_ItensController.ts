@@ -5,11 +5,8 @@ import { ILike } from "typeorm";
 export class CD_ItensController {
 
     async list (req: Request, res: Response): Promise<Response> {
-        let descricao = req.query.descricao;
                 
-        let cd_itens: CD_Itens[] = await CD_Itens.findBy({
-            id_itens: descricao ? ILike(`%${descricao}%`) : undefined
-        });
+        let cd_itens: CD_Itens[] = await CD_Itens.find();
 
         return res.status(200).json(cd_itens);
     }
