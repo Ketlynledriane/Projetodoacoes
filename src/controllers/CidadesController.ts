@@ -1,4 +1,7 @@
 import { Cidades } from "../models/Cidades";
+import { ILike} from 'typeorm';
+import { Request, Response } from 'express';
+import promptSync from 'prompt-sync';
 
 export class CidadesController {
 
@@ -21,7 +24,14 @@ export class CidadesController {
         return cidade;
     }
 
-    async save(cidade: Cidades): Promise<void>{
+   
+    async update (req: Request, res: Response): Promise<Response> {
+        let body = req.body;
+        let cidade: Cidades = res.locals.cidade;
+    
+        cidade.nome = body.nome,
         await cidade.save();
+    
+        return res.status(200).json(cidade);
     }
 }

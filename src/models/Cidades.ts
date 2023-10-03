@@ -15,7 +15,7 @@ export class Cidades extends BaseEntity {
   @OneToMany(() => Beneficiarios, (beneficiario) => beneficiario.cidade)
     public beneficiario: Beneficiarios[];
 
-  @ManyToOne(() => CD, (cd) => cd.cidade)
+  @OneToMany(() => CD, (cd) => cd.cidade)
     public cds: CD[];
 
   @OneToMany(() => Doador, (doadores) => doadores.cidade)
