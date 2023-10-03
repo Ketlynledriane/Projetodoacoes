@@ -5,6 +5,7 @@ import itensRoutes from './routes/itens'
 import cdRoutes from './routes/cd'
 import cd_itemRoutes from './routes/cd_item'
 import usuarioRoutes from './routes/usuario'
+import beneficiarioRoutes from './routes/beneficiario'
 
 let server: Express = express();
 let port: Number = Number(process.env.SERVER_PORT || 3000);
@@ -22,6 +23,7 @@ server.use(itensRoutes);
 server.use(cdRoutes);
 server.use(cd_itemRoutes);
 server.use(usuarioRoutes);
+server.use(beneficiarioRoutes);
 
 export default {
     start () {
