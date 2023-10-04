@@ -7,7 +7,7 @@ import { Movimentacao } from "../models/Movimentacao";
 const prompt = PromptSync();
 
 export class MovimentacoesController {
-
+ 
     /*async create (id: number, data_hora: Date, tipo: string, cd_item_id: number, quantidade: number, doador: string, id_beneficiario: number) {
         find doador by id (id)
         
