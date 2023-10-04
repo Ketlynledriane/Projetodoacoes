@@ -6,13 +6,9 @@ let md5 = require('md5');
 export class UsuariosControllers {
 
     async list (req: Request, res: Response): Promise<Response> {
-        let nome = req.query.nome;
-                
-        let users: Usuarios[] = await Usuarios.findBy({
-            nome: nome ? ILike(`%${nome}%`) : undefined
-        });
+        let users: Usuarios[] = await Usuarios.find();
 
-        return res.status(200).json(users);
+        return res.status(200).json(users);       
     }
 
     async find (req: Request, res: Response): Promise<Response> {

@@ -8,49 +8,45 @@ const prompt = promptSync();
 export class BeneficiariosControllers {
 
     async list (req: Request, res: Response): Promise<Response> {
-        let nome = req.query.nome;
-    
-        let users: Beneficiarios[] = await Beneficiarios.findBy({
-          nome: nome ? ILike(`%${nome}`) : undefined
-        });
-    
-        return res.status(200).json(users);
-    
-      }
-    
-      async create (req: Request, res: Response): Promise<Response> {
-        let body = req.body;
-    
-        console.log(body);
-    
-        let beneficiairo: Beneficiarios = await Beneficiarios.create({
-          nome: body.nome,
-          cpf: body.cpf,
-          id_cidade: body.id_cidade
-        }).save();
-    
-        return res.status(200).json(beneficiairo);
-      }
-    
-    
-      async delete (req: Request, res: Response): Promise<Response> {
-        let id = Number(req.params.id);
-    
-        let beneficiairo: Beneficiarios|null = await Beneficiarios.findOneBy({ id });
-        if (! beneficiairo) {
-          return res.status(422).json({ error: 'Usuario não encontrado!' });
-        }
-    
-        beneficiairo.remove();
-    
-        return res.status(200).json();
-      }
+      let beneficiairo: Beneficiarios[] = await Beneficiarios.find();
 
-      async find (req: Request, res: Response): Promise<Response> {
-        let beneficiairo: Beneficiarios= res.locals.beneficiairo;
-        return res.status(200).json(beneficiairo);
+      return res.status(200).json(beneficiairo);
     
-     }
+    }
+    
+    async create (req: Request, res: Response): Promise<Response> {
+      let body = req.body;
+    
+      console.log(body);
+    
+      let beneficiairo: Beneficiarios = await Beneficiarios.create({
+        nome: body.nome,
+        cpf: body.cpf,
+        id_cidade: body.id_cidade
+      }).save();
+    
+        return res.status(200).json(beneficiairo);
+    }
+    
+    
+    async delete (req: Request, res: Response): Promise<Response> {
+      let id = Number(req.params.id);
+    
+      let beneficiairo: Beneficiarios|null = await Beneficiarios.findOneBy({ id });
+      if (! beneficiairo) {
+        return res.status(422).json({ error: 'Usuario não encontrado!' });
+      }
+    
+      beneficiairo.remove();
+    
+      return res.status(200).json();
+    }
+
+    async find (req: Request, res: Response): Promise<Response> {
+      let beneficiairo: Beneficiarios= res.locals.beneficiairo;
+      return res.status(200).json(beneficiairo);
+    
+    }
 
     async update (req: Request, res: Response): Promise<Response> {
         let body = req.body;
@@ -63,5 +59,4 @@ export class BeneficiariosControllers {
     
         return res.status(200).json(beneficiairo);
     }
- 
 }

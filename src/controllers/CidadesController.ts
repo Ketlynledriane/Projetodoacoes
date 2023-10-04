@@ -5,8 +5,10 @@ import promptSync from 'prompt-sync';
 
 export class CidadesController {
 
-    async list (): Promise<Cidades[] | null> {
-        return await Cidades.find();
+    async list (req: Request, res: Response): Promise<Response> {
+        let city: Cidades[] = await Cidades.find();
+
+        return res.status(200).json(city);
     }
 
     async create (nome: string) {

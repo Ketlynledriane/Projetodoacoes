@@ -5,13 +5,9 @@ import { Request, Response} from 'express';
 export class ItensController {
 
     async list (req: Request, res: Response): Promise<Response> {
-        let descricao = req.query.descricao;
-                
-        let itens: Itens[] = await Itens.findBy({
-            descricao: descricao ? ILike(`%${descricao}%`) : undefined
-        });
+        let descricao: Itens[] = await Itens.find();
 
-        return res.status(200).json(itens);
+        return res.status(200).json(descricao);
     }
 
     async find (req: Request, res: Response): Promise<Response> {

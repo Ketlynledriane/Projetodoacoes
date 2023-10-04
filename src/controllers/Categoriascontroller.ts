@@ -5,13 +5,9 @@ import { ILike } from "typeorm";
 export class CategoriasController {
 
     async list (req: Request, res: Response): Promise<Response> {
-        let descricao = req.query.descricao;
-                
-        let descri: Categorias[] = await Categorias.findBy({
-            descricao: descricao ? ILike(`%${descricao}%`) : undefined
-        });
+        let categoria: Categorias[] = await Categorias.find();
 
-        return res.status(200).json(descri);
+        return res.status(200).json(categoria);
     }
 
     async create (req: Request, res: Response): Promise<Response> {

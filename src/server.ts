@@ -1,11 +1,15 @@
 import express, { Express, NextFunction, Request, Response } from 'express';
 import cors from 'cors';
+import beneficiarioRoutes from './routes/beneficiario'
 import categoriasRoutes from './routes/categorias'
-import itensRoutes from './routes/itens'
 import cdRoutes from './routes/cd'
 import cd_itemRoutes from './routes/cd_item'
+import cidadeRoutes from './routes/cidades'
+import doadorRoutes from './routes/doador'
+import itensRoutes from './routes/itens'
+import movimentacaoRoutes from './routes/movimentacao'
 import usuarioRoutes from './routes/usuario'
-import beneficiarioRoutes from './routes/beneficiario'
+
 
 let server: Express = express();
 let port: Number = Number(process.env.SERVER_PORT || 3000);
@@ -18,12 +22,16 @@ server.use((req: Request, res: Response, next: NextFunction) => {
     next();
 });
 
-server.use(categoriasRoutes);
-server.use(itensRoutes);
-server.use(cdRoutes);
-server.use(cd_itemRoutes);
-server.use(usuarioRoutes);
 server.use(beneficiarioRoutes);
+server.use(categoriasRoutes);
+server.use(cd_itemRoutes);
+server.use(cdRoutes);
+server.use(cidadeRoutes);
+server.use(doadorRoutes);
+server.use(itensRoutes);
+server.use(movimentacaoRoutes);
+server.use(usuarioRoutes);
+
 
 export default {
     start () {
