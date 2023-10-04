@@ -33,13 +33,9 @@ export class MovimentacoesController {
         return res.status(201).json({message: "Criado com sucesso!"});
     }
         // Falta terminar o listar, está com erro 
-    async list (req: Request, res: Response): Promise<Movimentacao[]> {
+    async list (req: Request, res: Response): Promise<Response> {
         let listar = await Movimentacao.find();
-        return res.status(200).json({listar})
-    }
-
-    async delete (movimentacao: Movimentacao) {
-        await Movimentacao.remove(movimentacao);
+        return res.status(200).json({movimentacoes: listar})
     }
 
     async find(id: number): Promise<Movimentacao | null>{
@@ -49,5 +45,31 @@ export class MovimentacoesController {
 
     async save(movimentacao: Movimentacao): Promise<void>{
         await movimentacao.save();
+    }
+
+    public async relatorioDoacoes(req: Request, res: Response): Promise<Response> {
+        return res.json((await Movimentacao.findBy({ tipo: "doacao"})).map(function (movimentacao) {
+            return {
+                id: movimentacao.id,
+                doador: movimentacao.doador?.nome || "Anônimo",
+                item: movimentacao.cd_item.item.descricao,
+                categoria: movimentacao.cd_item.item.categoria.descricao,
+                quantidade: movimentacao.quantidade,
+                momento: movimentacao.data_hora.toLocaleString()
+            }
+        }));
+    }
+
+    public async relatorioRetirada(req: Request, res: Response): Promise<Response> {
+        return res.json((await Movimentacao.findBy({ tipo: ""})).map(function (movimentacao) {
+            return {
+                id: movimentacao.id,
+                beneficiario: movimentacao.beneficiario?.nome,
+                item: movimentacao.cd_item.item.descricao,
+                categoria: movimentacao.cd_item.item.categoria.descricao,
+                quantidade: movimentacao.quantidade,
+                momento: movimentacao.data_hora.toLocaleString()
+            }
+        }));
     }
 }
