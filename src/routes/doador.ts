@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import { DoadorControllers } from '../controllers/DoadorController;
 import * as yup from 'yup';
 import { Doador } from '../models/Doador';
+import { DoadorController } from '../controllers/DoadorController';
 
 async function validarPayload (req: Request, res: Response, next: NextFunction): Promise<Response|void>{
   let schema = yup.object({
@@ -42,17 +42,17 @@ async function validarSeExiste (req: Request, res: Response, next: NextFunction)
 
 let router: Router = Router();
 
-let beneficiarioController: DoadorControllers = new DoadorControllers();
+let beneficiarioController: DoadorController = new DoadorController();
 
-router.get('/doador', DoadorControllers.list);
+// router.get('/doador', DoadorController.list);
 
-router.get('/doador/:id', validarSeExiste, DoadorControllers.find);
+// router.get('/doador/:id', validarSeExiste, DoadorController.find);
 
-router.post('/doador', validarPayload, DoadorControllers.create);
+// router.post('/doador', validarPayload, DoadorController.create);
 
-router.put('/doador/:id', validarSeExiste, DoadorControllers.update);
+// router.put('/doador/:id', validarSeExiste, DoadorController.update);
 
-router.delete('/doador/:id', DoadorControllers.delete);
+// router.delete('/doador/:id', DoadorController.delete);
 
 export default router;
 

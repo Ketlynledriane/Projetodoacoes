@@ -1,31 +1,41 @@
-import { CD } from "../models/CD";
-import { Cidades } from "../models/Cidades";
 import { Doador } from "../models/Doador";
 import { Beneficiarios } from "../models/Beneficiarios";
 import PromptSync from "prompt-sync";
 import { Movimentacao } from "../models/Movimentacao";
+import { MovimentacaoRequest } from "../routes/movimentacao";
+import { Request, Response } from 'express';
 const prompt = PromptSync();
 
 export class MovimentacoesController {
- 
-    /*async create (id: number, data_hora: Date, tipo: string, cd_item_id: number, quantidade: number, doador: string, id_beneficiario: number) {
-        find doador by id (id)
-        
-        let movimentacoes: Movimentacao = Movimentacao.create({
-            id, 
-            data_hora,
-            tipo,
-            cd_item_id,
-            quantidade,
-            doadorObjeto,
-            id_beneficiario
-        });
-        await movimentacoes.save();
-        return movimentacoes;
-    }*/
 
-    async list (): Promise<Movimentacao[]> {
-        return await Movimentacao.find();
+    async create (req: Request, res: Response): Promise<Response> {
+        let body = req.body as any as MovimentacaoRequest;
+
+        var coluna = "";
+        var objeto = null;
+
+        if (body.tipo == "doacao") {
+            coluna = "doador";
+            objeto = await Doador.findOneBy({ id: body.doador_id });
+        } else {
+            coluna = "beneficiario";
+            objeto = await Beneficiarios.findOneBy({ id: body.beneficiario_id });
+        }
+
+        await Movimentacao.create({
+            data_hora: new Date,
+            tipo: body.tipo,
+            cd_item_id: body.item_id,
+            quantidade: body.quantidade,
+            [coluna]: objeto
+        } as any).save();
+
+        return res.status(201).json({message: "Criado com sucesso!"});
+    }
+        // Falta terminar o listar, está com erro 
+    async list (req: Request, res: Response): Promise<Movimentacao[]> {
+        let listar = await Movimentacao.find();
+        return res.status(200).json({listar})
     }
 
     async delete (movimentacao: Movimentacao) {

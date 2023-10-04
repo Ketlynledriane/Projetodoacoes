@@ -5,9 +5,21 @@ import { Categorias } from "../models/Categorias";
 import { Movimentacao } from "../models/Movimentacao";
 import { MovimentacoesController } from "../controllers/MovimentacoesController";
 
+export interface MovimentacaoRequest {
+    tipo: string;
+    item_id: number;
+    quantidade: number;
+    doador_id: number;
+    beneficiario_id: number;
+}
+
 async function validarPayload (req: Request, res: Response, next: NextFunction): Promise<Response|void>{
     let schema = yup.object({
-        descricao: yup.string().min(3).max(255).required(),
+        tipo: yup.string().min(3).max(255).required(),
+        item_id: yup.number().required(),
+        quantidade: yup.number().min(1).required(),
+        doador_id: yup.number().required(),
+        beneficiario_id: yup.number().required(),
     });
 
     let payload = req.body;
@@ -17,7 +29,7 @@ async function validarPayload (req: Request, res: Response, next: NextFunction):
         return next();
     } catch(error){
         if (error instanceof yup.ValidationError) {
-            return res.status(400).json({erros: error.errors});
+            return res.status(422).json({erros: error.errors});
         }
         return res.status(500).json({error: 'Ops! Algo deu errado!'});
     }
@@ -43,9 +55,9 @@ router.get('/movimentacao', movimentacaoController.list);
 
 router.post('/movimentacao', validarPayload, movimentacaoController.create);
 
-router.put('/movimentacao/:id', validarSeExiste, movimentacaoController.update);
+// router.put('/movimentacao/:id', validarSeExiste, movimentacaoController.update);
 
-router.delete('/movimentacao/:id', movimentacaoController.delete);
+// router.delete('/movimentacao/:id', movimentacaoController.delete);
 
 router.get('/movimentacao/:id', validarSeExiste, movimentacaoController.find);
 

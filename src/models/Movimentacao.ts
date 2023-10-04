@@ -12,7 +12,7 @@ export class Movimentacao extends BaseEntity {
     @Column({
         type: 'timestamp with time zone',
     })
-    public data_hora: Date 
+    public data_hora: Date;
 
     @Column()
     public tipo: string;
