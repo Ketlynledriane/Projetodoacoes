@@ -32,7 +32,11 @@ export class MovimentacoesController {
 
         return res.status(201).json({message: "Criado com sucesso!"});
     }
-        // Falta terminar o listar, está com erro 
+
+    async delete (movimentacao: Movimentacao) {
+        await Movimentacao.remove(movimentacao);
+    }
+    
     async list (req: Request, res: Response): Promise<Response> {
         let listar = await Movimentacao.find();
         return res.status(200).json({movimentacoes: listar})
