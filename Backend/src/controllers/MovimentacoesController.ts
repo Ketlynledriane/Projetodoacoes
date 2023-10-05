@@ -66,10 +66,6 @@ export class MovimentacoesController {
         return res.json(movimentacao);
     }
 
-    async save(movimentacao: Movimentacao): Promise<void>{
-    await movimentacao.save();
-    }
-
     public async relatorioDoacoes(req: Request, res: Response): Promise<Response> {
         return res.json((await Movimentacao.findBy({ tipo: "doacao"})).map(function (movimentacao) {
             return {

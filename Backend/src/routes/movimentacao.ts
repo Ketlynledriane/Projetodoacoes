@@ -18,8 +18,8 @@ async function validarPayload (req: Request, res: Response, next: NextFunction):
         tipo: yup.string().min(3).max(255).required(),
         item_id: yup.number().required(),
         quantidade: yup.number().min(1).required(),
-        doador_id: yup.number().required(),
-        beneficiario_id: yup.number().required(),
+        doador_id: yup.number(),
+        beneficiario_id: yup.number(),
     });
 
     let payload = req.body;
@@ -54,13 +54,15 @@ let movimentacaoController: MovimentacoesController = new MovimentacoesControlle
 router.get('/movimentacao', movimentacaoController.list);
 
 router.post('/movimentacao', validarPayload, movimentacaoController.create);
- 
+
+router.delete('/movimentacao/:id', movimentacaoController.delete);
+
 router.get('/movimentacao/relatorioDoacoes', movimentacaoController.relatorioDoacoes);
 
 router.get('/movimentacao/relatorioRetirada', movimentacaoController.relatorioRetirada);
 
 router.get('/movimentacao/:id', validarSeExiste, movimentacaoController.find);
 
-
+router.get('/movimentacao/:id', validarSeExiste, movimentacaoController.edit);
 
 export default router;
