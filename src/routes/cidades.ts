@@ -34,7 +34,7 @@ async function validarSeExiste (req: Request, res: Response, next: NextFunction)
 
   res.locals.cidade = cidade;
 
- return next();
+    return next();
 }
 
 

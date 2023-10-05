@@ -18,8 +18,8 @@ async function validarPayload (req: Request, res: Response, next: NextFunction):
         tipo: yup.string().min(3).max(255).required(),
         item_id: yup.number().required(),
         quantidade: yup.number().min(1).required(),
-        doador_id: yup.number().required(),
-        beneficiario_id: yup.number().required(),
+        doador_id: yup.number(),
+        beneficiario_id: yup.number(),
     });
 
     let payload = req.body;

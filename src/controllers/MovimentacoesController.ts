@@ -11,12 +11,16 @@ export class MovimentacoesController {
     async create (req: Request, res: Response): Promise<Response> {
         let body = req.body as any as MovimentacaoRequest;
 
-        var coluna = "";
-        var objeto = null;
+        let coluna = "";
+        let objeto = null;
 
         if (body.tipo == "doacao") {
             coluna = "doador";
-            objeto = await Doador.findOneBy({ id: body.doador_id });
+            if (!body.doador_id) {   
+                objeto = null;            
+            } else {
+                objeto = await Doador.findOneBy({ id: body.doador_id });
+            }
         } else {
             coluna = "beneficiario";
             objeto = await Beneficiarios.findOneBy({ id: body.beneficiario_id });
