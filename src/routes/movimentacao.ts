@@ -55,6 +55,8 @@ router.get('/movimentacao', movimentacaoController.list);
 
 router.post('/movimentacao', validarPayload, movimentacaoController.create);
 
+router.delete('/movimentacao/:id', movimentacaoController.delete);
+
 router.get('/movimentacao/relatorioDoacoes', movimentacaoController.relatorioDoacoes);
 
 router.get('/movimentacao/relatorioRetirada', movimentacaoController.relatorioRetirada);
