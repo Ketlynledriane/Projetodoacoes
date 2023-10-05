@@ -63,4 +63,6 @@ router.get('/movimentacao/relatorioRetirada', movimentacaoController.relatorioRe
 
 router.get('/movimentacao/:id', validarSeExiste, movimentacaoController.find);
 
+router.get('/movimentacao/:id', validarSeExiste, movimentacaoController.edit);
+
 export default router;

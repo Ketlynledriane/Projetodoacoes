@@ -37,8 +37,12 @@ export class MovimentacoesController {
         return res.status(201).json({message: "Criado com sucesso!"});
     }
 
-    async delete (movimentacao: Movimentacao) {
-        await Movimentacao.remove(movimentacao);
+    async delete (req: Request, res: Response): Promise<Response> {
+        let movimentacao: Movimentacao = res.locals.movimentacao;
+
+        movimentacao.remove();
+
+        return res.status(204)
     }
     
     async list (req: Request, res: Response): Promise<Response> {
@@ -46,13 +50,24 @@ export class MovimentacoesController {
         return res.status(200).json({movimentacoes: listar})
     }
 
-    async find(id: number): Promise<Movimentacao | null>{
-        let movimentacao: Movimentacao | null = await Movimentacao.findOneBy({id: id});
-        return movimentacao;
+    async edit(req: Request, res: Response) {
+        let movimentacao: Movimentacao = res.locals.movimentacao;
+
+        movimentacao.tipo;
+        movimentacao.cd_item_id;
+        movimentacao.quantidade;
+
+        await movimentacao.save();
+        return res.json(movimentacao);
+    }
+
+    async find (req: Request, res: Response): Promise<Response> {
+        let movimentacao: Movimentacao = res.locals.movimentacao;
+        return res.json(movimentacao);
     }
 
     async save(movimentacao: Movimentacao): Promise<void>{
-        await movimentacao.save();
+    await movimentacao.save();
     }
 
     public async relatorioDoacoes(req: Request, res: Response): Promise<Response> {
