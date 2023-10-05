@@ -58,12 +58,12 @@ export class MovimentacoesController {
         movimentacao.quantidade;
 
         await movimentacao.save();
-        return res.json(movimentacao);
+        return res.status(200).json(movimentacao);
     }
 
     async find (req: Request, res: Response): Promise<Response> {
         let movimentacao: Movimentacao = res.locals.movimentacao;
-        return res.json(movimentacao);
+        return res.status(200).json(movimentacao);
     }
 
     public async relatorioDoacoes(req: Request, res: Response): Promise<Response> {
