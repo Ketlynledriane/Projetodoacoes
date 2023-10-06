@@ -1,14 +1,14 @@
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get('id');
 
-let inputNome = document.getElementById('nome');
+let inputDescricao = document.getElementById('descrição');
 let form = document.getElementById('formulario');
 
 async function buscarDados () {
-  let resposta = await fetch('http://localhost:3000/categorias/' + id);
+  let resposta = await fetch('http://localhost:3000/usuarios/' + id);
   if (resposta.ok) {
     let categoria = await resposta.json();
-    inputNome.value = categoria.nome;
+    inputDescricao.value = categoria.descricao;
   } else if (resposta.status === 422) {
     let e = await resposta.json();
     alert(e.error);
@@ -26,13 +26,13 @@ form.addEventListener('submit', async (event) => {
   event.stopPropagation();
   event.preventDefault();
 
-  let nome = inputNome.value;
+  let descricao = inputDescricao.value;
 
   let payload = {
-    nome,
+    descricao,
   }
 
-  let url = 'http://localhost:3000/categorias';
+  let url = 'http://localhost:3000/usuarios';
   let method = 'POST';
   if (id) {
     url += '/' + id;
