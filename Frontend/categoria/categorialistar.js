@@ -9,7 +9,7 @@ async function buscarCategoria () {
     let tdDescricao = document.createElement('td');
     let tdAcoes = document.createElement('td');
 
-    tdDescricao.innerText = categoria.nome;
+    tdDescricao.innerText = categoria.descricao;
     tdAcoes.innerHTML = `
       <a href="categoriaformulario.html?id=${categoria.id}">Editar</a>
       <button onclick="excluir(${categoria.id})">Excluir</button>
@@ -23,7 +23,7 @@ async function buscarCategoria () {
 }
 
 async function excluir (id) {
-  await fetch('http://localhost:3000/usuarios/' + id, {
+  await fetch('http://localhost:3000/categorias/' + id, {
     method: 'DELETE'
   });
 
