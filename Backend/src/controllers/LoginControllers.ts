@@ -13,8 +13,7 @@ export class LoginController{
         senha = md5(senha);
         let usuarioLogin = await Usuarios.findOneBy({email: email,senha: senha});
 
-        // Retorna o usuário autenticado para ser utilizado mais tarde caso necessário
+        //Retorna o usuário autenticado para ser utilizado mais tarde caso necessário
         return usuarioLogin;
     }
-
 }

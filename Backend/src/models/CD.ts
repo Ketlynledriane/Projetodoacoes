@@ -1,4 +1,4 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, OneToMany, ManyToOne } from "typeorm";
+import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, OneToMany, ManyToOne, JoinColumn } from "typeorm";
 import { CD_Itens } from "./CD_Itens";
 import { Cidades } from "./Cidades";
 import { Movimentacao } from "./Movimentacao";
@@ -18,6 +18,7 @@ export class CD extends BaseEntity {
 
     @ManyToOne(() => Cidades, (cidade) => cidade.cds, {
         eager: true})
+    @JoinColumn({ name: 'id_cidade' })
     public cidade: Cidades;
     
     @OneToMany(() => CD_Itens, (cd_itens) => cd_itens.id_cd)

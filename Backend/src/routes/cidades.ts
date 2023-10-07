@@ -42,14 +42,14 @@ let router: Router = Router();
 
 let cidadeController: CidadesController = new CidadesController();
 
-router.get('/cidade', cidadeController.list);
+router.get('/cidades', cidadeController.list);
 
-router.get('/cidade/:id', validarSeExiste, cidadeController.find);
+router.get('/cidades/:id', validarSeExiste, cidadeController.find);
 
-router.post('/cidade', validarPayload, cidadeController.create);
+router.post('/cidades', validarPayload, cidadeController.create);
 
-router.put('/cidade/:id', validarSeExiste, cidadeController.update);
+router.put('/cidades/:id', validarSeExiste, cidadeController.update);
 
-router.delete('/cidade/:id', cidadeController.delete);
+router.delete('/cidades/:id', cidadeController.delete);
 
 export default router;

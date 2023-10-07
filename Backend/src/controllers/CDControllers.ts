@@ -30,9 +30,10 @@ export class CDControllers {
     async update (req: Request, res: Response): Promise<Response> {
         let body = req.body;
         let cd: CD = res.locals.cd;
+        console.log(body)
 
-        cd.nome = body.nome,
-        cd.id_cidade = body.id_cidade,
+        cd.nome = body.nome;
+        cd.id_cidade = body.id_cidade;
         await cd.save();
     
         return res.status(200).json(cd);

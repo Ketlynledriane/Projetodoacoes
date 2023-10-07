@@ -29,7 +29,7 @@ async function validarSeExiste (req: Request, res: Response, next: NextFunction)
         return res.status(422).json({error: 'Centro de Distribuição não encontrado!' });
     }
     
-    res.locals.usuario = cd;
+    res.locals.cd = cd;
     
     return next();
 }
@@ -42,9 +42,9 @@ router.get('/cd', cdController.list);
 
 router.post('/cd', validarPayload, cdController.create);
 
-router.put('/cd/:id', validarSeExiste, cdController.update);
+router.put('/cd/:id', validarSeExiste, validarPayload, cdController.update);
 
-router.delete('/cd/:id', cdController.delete);
+router.delete('/cd/:id', validarSeExiste, cdController.delete);
 
 router.get('/cd/:id', validarSeExiste, cdController.find);
 
