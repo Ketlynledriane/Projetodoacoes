@@ -25,8 +25,9 @@ export class BeneficiariosControllers {
         id_cidade: body.id_cidade
       }).save();
     
-        return res.status(200).json(beneficiairo);
+        return res.status(200).json(Beneficiarios);
     }
+    
     
     
     async delete (req: Request, res: Response): Promise<Response> {
