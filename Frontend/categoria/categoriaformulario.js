@@ -1,11 +1,11 @@
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get('id');
 
-let inputDescricao = document.getElementById('descrição');
+let inputDescricao = document.getElementById('nome');
 let form = document.getElementById('formulario');
 
 async function buscarDados () {
-  let resposta = await fetch('http://localhost:3000/usuarios/' + id);
+  let resposta = await fetch('http://localhost:3000/categorias/' + id);
   if (resposta.ok) {
     let categoria = await resposta.json();
     inputDescricao.value = categoria.descricao;
@@ -32,7 +32,7 @@ form.addEventListener('submit', async (event) => {
     descricao,
   }
 
-  let url = 'http://localhost:3000/usuarios';
+  let url = 'http://localhost:3000/categorias';
   let method = 'POST';
   if (id) {
     url += '/' + id;
@@ -49,7 +49,7 @@ form.addEventListener('submit', async (event) => {
   });
 
   if (resposta.ok) {
-    window.location.href = 'index.html'
+    window.location.href = 'categoria.html'
   } else {
     alert('Ops! Algo deu errado!');
   }

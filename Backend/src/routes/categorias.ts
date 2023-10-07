@@ -43,7 +43,7 @@ router.post('/categorias', validarPayload, categoriaController.create);
 
 router.put('/categorias/:id', validarSeExiste, categoriaController.update);
 
-router.delete('/categorias/:id', categoriaController.delete);
+router.delete('/categorias/:id', validarSeExiste, categoriaController.delete);
 
 router.get('/categorias/:id', validarSeExiste, categoriaController.find);
 

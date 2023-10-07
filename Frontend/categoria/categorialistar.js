@@ -11,10 +11,11 @@ async function buscarCategoria () {
 
     tdDescricao.innerText = categoria.descricao;
     tdAcoes.innerHTML = `
-      <a href="categoriaformulario.html?id=${categoria.id}">Editar</a>
-      <button onclick="excluir(${categoria.id})">Excluir</button>
+      <a class="btn btn-outline-primary btn-sm" href="categoriaformulario.html?id=${categoria.id}">Editar</a>
+      <button class="btn btn-outline-danger btn-sm" onclick="excluir(${categoria.id})">Excluir</button>
     `;
 
+    tdAcoes.classList = "text-center";
     tr.appendChild(tdDescricao);
     tr.appendChild(tdAcoes);
 
@@ -23,11 +24,15 @@ async function buscarCategoria () {
 }
 
 async function excluir (id) {
-  await fetch('http://localhost:3000/categorias/' + id, {
+  let confirma = confirm("Deseja excluir essa categoria? Esta ação não pode ser revertida.")
+  if(confirma) {
+    await fetch('http://localhost:3000/categorias/' + id, {
     method: 'DELETE'
   });
 
   window.location.reload();
+  }
+  
 }
 
 buscarCategoria();
