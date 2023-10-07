@@ -7,6 +7,7 @@ async function validarPayload (req: Request, res: Response, next: NextFunction):
     let schema = yup.object({
         descricao: yup.string().min(3).max(255).required(),
         id_categoria: yup.number().required(),
+        id_cd: yup.number().required()
     });
 
     let payload = req.body;
@@ -44,7 +45,7 @@ router.post('/itens', validarPayload, itemController.create);
 
 router.put('/itens/:id', validarSeExiste, itemController.update);
 
-router.delete('/itens/:id', itemController.delete);
+router.delete('/itens/:id', validarSeExiste, itemController.delete);
 
 router.get('/itens/:id', validarSeExiste, itemController.find);
 
