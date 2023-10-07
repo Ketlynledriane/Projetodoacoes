@@ -8,9 +8,9 @@ const prompt = promptSync();
 export class BeneficiariosControllers {
 
     async list (req: Request, res: Response): Promise<Response> {
-      let beneficiairo: Beneficiarios[] = await Beneficiarios.find();
+      let beneficiario: Beneficiarios[] = await Beneficiarios.find();
 
-      return res.status(200).json(beneficiairo);
+      return res.status(200).json(beneficiario);
     
     }
     
@@ -19,13 +19,13 @@ export class BeneficiariosControllers {
     
       console.log(body);
     
-      let beneficiairo: Beneficiarios = await Beneficiarios.create({
+      let beneficiario: Beneficiarios = await Beneficiarios.create({
         nome: body.nome,
         cpf: body.cpf,
         id_cidade: body.id_cidade
       }).save();
     
-        return res.status(200).json(beneficiairo);
+        return res.status(200).json(beneficiario);
     }
     
     
