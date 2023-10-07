@@ -42,17 +42,17 @@ async function validarSeExiste (req: Request, res: Response, next: NextFunction)
 
 let router: Router = Router();
 
-let beneficiarioController: DoadorController = new DoadorController();
+let doadorController: DoadorController = new DoadorController();
 
-// router.get('/doador', DoadorController.list);
+router.get('/doador', doadorController.list);
 
-// router.get('/doador/:id', validarSeExiste, DoadorController.find);
+router.get('/doador/:id', validarSeExiste, doadorController.find);
 
-// router.post('/doador', validarPayload, DoadorController.create);
+router.post('/doador', validarPayload, doadorController.create);
 
-// router.put('/doador/:id', validarSeExiste, DoadorController.update);
+router.put('/doador/:id', validarSeExiste, doadorController.update);
 
-// router.delete('/doador/:id', DoadorController.delete);
+router.delete('/doador/:id', validarSeExiste, doadorController.delete);
 
 export default router;
 

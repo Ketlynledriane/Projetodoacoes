@@ -30,7 +30,6 @@ export class CDControllers {
     async update (req: Request, res: Response): Promise<Response> {
         let body = req.body;
         let cd: CD = res.locals.cd;
-        console.log(body)
 
         let cidade = await Cidades.findOneBy({ id: body.id_cidade});
 
