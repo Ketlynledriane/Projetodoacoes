@@ -48,7 +48,7 @@ router.get('/beneficiario', beneficiarioController.list);
 
 router.get('/beneficiario/:id', validarSeExiste, beneficiarioController.find);
 
-router.post('/beneficiairo', validarPayload, beneficiarioController.create);
+router.post('/beneficiario', validarPayload, beneficiarioController.create);
 
 router.put('/beneficiario/:id', validarSeExiste, beneficiarioController.update);
 
