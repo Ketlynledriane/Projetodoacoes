@@ -4,15 +4,13 @@ import { ILike } from "typeorm";
 let md5 = require('md5');
 
 export class DoadorController {
+   
 
     async list (req: Request, res: Response): Promise<Response> {
-        let nome = req.query.nome;
-                
-        let users: Doador[] = await Doador.findBy({
-            nome: nome ? ILike(`%${nome}%`) : undefined
-        });
-
-        return res.status(200).json(users);
+                      
+        let doador: Doador[] = await Doador.find();
+       
+        return res.status(200).json(doador);
     }
 
     async find (req: Request, res: Response): Promise<Response> {

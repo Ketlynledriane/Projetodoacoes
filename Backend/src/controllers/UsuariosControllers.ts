@@ -30,7 +30,7 @@ export class UsuariosControllers {
     
         return res.status(200).json(usuario);
     }
-
+    
     async update (req: Request, res: Response): Promise<Response> {
         let body = req.body;
         let usuario: Usuarios = res.locals.usuario;
@@ -51,5 +51,6 @@ export class UsuariosControllers {
     return res.status(200).json();
 
     }
+    
     
 }
