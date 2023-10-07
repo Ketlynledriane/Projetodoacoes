@@ -16,9 +16,11 @@ export class UsuariosControllers {
 
       return res.status(200).json(usuario);
     }
+       
 
     async create (req: Request, res: Response): Promise<Response> {
         let body = req.body;
+        console.log(body)
        
         let usuario: Usuarios = await Usuarios.create({
             nome: body.nome,
