@@ -1,15 +1,12 @@
 import { Doador } from '../models/Doador';
 import { Request, Response } from 'express';
-import { ILike } from "typeorm";
-let md5 = require('md5');
 
 export class DoadorController {
-   
 
     async list (req: Request, res: Response): Promise<Response> {
-                      
+
         let doador: Doador[] = await Doador.find();
-       
+
         return res.status(200).json(doador);
     }
 
@@ -21,7 +18,7 @@ export class DoadorController {
 
     async create (req: Request, res: Response): Promise<Response> {
         let body = req.body;
-       
+
         let doador: Doador = await Doador.create({
             nome: body.nome,
             cpf: body.cpf,

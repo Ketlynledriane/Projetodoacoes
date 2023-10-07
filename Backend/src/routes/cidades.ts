@@ -50,6 +50,6 @@ router.post('/cidades', validarPayload, cidadeController.create);
 
 router.put('/cidades/:id', validarSeExiste, cidadeController.update);
 
-router.delete('/cidades/:id', cidadeController.delete);
+router.delete('/cidades/:id', validarSeExiste, cidadeController.delete);
 
 export default router;
