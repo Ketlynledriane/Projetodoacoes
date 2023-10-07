@@ -25,7 +25,7 @@ export class BeneficiariosControllers {
         id_cidade: body.id_cidade
       }).save();
     
-        return res.status(200).json(Beneficiarios);
+        return res.status(200).json(beneficiairo);
     }
     
     
