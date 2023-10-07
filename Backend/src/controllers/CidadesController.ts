@@ -11,19 +11,28 @@ export class CidadesController {
         return res.status(200).json(city);
     }
 
-    async create (nome: string) {
-        let cidade: Cidades = Cidades.create({ nome });
-        await cidade.save();
-        return cidade;
+
+    async create (req: Request, res: Response): Promise<Response> {
+        let body = req.body;
+       
+        let cidade: Cidades = await Cidades.create({
+            nome: body.nome,
+        }).save();
+    
+        return res.status(200).json(cidade);
+    }
+    async delete (req: Request, res: Response): Promise<Response> {
+        let cidade: Cidades= res.locals.categoria;
+    
+        cidade.remove();
+        
+        return res.status(200).json();
     }
 
-    async delete (cidade: Cidades) {
-        await Cidades.remove(cidade)
-    }
-
-    async find(id: number): Promise<Cidades | null>{
-        let cidade: |Cidades | null = await Cidades.findOneBy({id: id});
-        return cidade;
+    async find (req: Request, res: Response): Promise<Response> {
+        let cidade: Cidades = res.locals.cidade;
+  
+        return res.status(200).json(cidade);
     }
 
    
