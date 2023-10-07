@@ -32,8 +32,16 @@ export class CDControllers {
         let cd: CD = res.locals.cd;
         console.log(body)
 
+        let cidade = await Cidades.findOneBy({ id: body.id_cidade});
+
+        if (!cidade) {
+            return res.status(422).json({
+                message: "Cidade não existe"
+            });
+        }
+
         cd.nome = body.nome;
-        cd.id_cidade = body.id_cidade;
+        cd.cidade = cidade;
         await cd.save();
     
         return res.status(200).json(cd);

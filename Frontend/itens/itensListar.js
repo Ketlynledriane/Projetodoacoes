@@ -11,12 +11,12 @@ async function buscarItem () {
     let tdDescricao = document.createElement('td');
     let tdAcoes = document.createElement('td');
 
-    tdDescricao.innerText = item.nome;
-    tdCategorias.innerText = item.categorias.nome;
-    tdCd.innerText = item.cd.nome;
+    tdDescricao.innerText = item.descricao;
+    tdCategorias.innerText = item.categoria.descricao;
+    tdCd.innerText = item.cd_itens?.map(cd_item => cd_item.cd.nome)?.join(", ");
     tdAcoes.innerHTML = `
-      <a class="btn btn-outline-primary btn-sm" href="itensFormulario.html?id=${itens.id}">Editar</a>
-      <button class="btn btn-outline-danger btn-sm" onclick="excluir(${itens.id})">Excluir</button>
+      <a class="btn btn-outline-primary btn-sm" href="itensFormulario.html?id=${item.id}">Editar</a>
+      <button class="btn btn-outline-danger btn-sm" onclick="excluir(${item.id})">Excluir</button>
     `;
 
     tdAcoes.classList = "text-center";

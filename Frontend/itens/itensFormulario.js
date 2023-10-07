@@ -11,8 +11,16 @@ async function buscarDados () {
   if (resposta.ok) {
     let itens = await resposta.json();
     inputDescricao.value = itens.descricao;
-    campoCategoria = itens.id_categoria;
-    campoCd = itens.id_cd;
+    campoCategoria.value = itens.categoria.id;
+
+    // Seleciona os CDs no campo select multiplo
+    let values = itens.cd_itens?.map(cd_item => cd_item.cd.id.toString());
+    for (let i = 0; i < campoCd.options.length; i++) {
+        campoCd.options[i].selected = values.indexOf(campoCd.options[i].value) >= 0;
+        if (campoCd.options[i].selected) {
+            campoCd.options[i].disabled = true;
+        }
+    }
 
   } else if (resposta.status === 422) {
     let e = await resposta.json();
@@ -29,11 +37,12 @@ form.addEventListener('submit', async (event) => {
 
   let descricao = inputDescricao.value;
   let id_categoria = campoCategoria.value;
-  let id_cd = campoCd.value;
+
+  let cds = Array.from(campoCd.selectedOptions).map(({ value }) => value)
 
   let payload = {
     descricao,
-    id_cd,
+    cds,
     id_categoria
   }
 

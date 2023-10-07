@@ -19,7 +19,9 @@ export class Itens extends BaseEntity {
     @JoinColumn({ name: 'id_categoria' })
     public categoria: Categorias;
 
-    @OneToMany(() => CD_Itens, (cd_itens) => cd_itens.id_itens)
+    @OneToMany(() => CD_Itens, (cd_itens) => cd_itens.item, {
+        eager: true
+    })
     public cd_itens: CD_Itens[];
     
 }

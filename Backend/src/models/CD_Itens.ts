@@ -14,13 +14,13 @@ export class CD_Itens extends BaseEntity {
     @Column()
     public id_cd: number;
 
-    @ManyToOne(() => Itens, (itens) => itens.cd_itens, {
-        eager: true,
-    })
+    @ManyToOne(() => Itens, (itens) => itens.cd_itens)
     @JoinColumn({ name: 'id_itens' })
     public item: Itens;
     
-    @ManyToOne(() => CD, (cd) => cd.cd_itens)
+    @ManyToOne(() => CD, (cd) => cd.cd_itens, {
+        eager: true 
+    })
     @JoinColumn({ name: 'id_cd' })
     public cd: CD;
 
