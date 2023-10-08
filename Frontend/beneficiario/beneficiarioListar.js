@@ -11,9 +11,9 @@ async function buscarBeneficiario () {
     let tdCidade = document.createElement('td');
     let tdAcoes = document.createElement('td');
 
-    tdNome.innerText = doador.nome;
-    tdCpf.innerText = doador.cpf;
-    tdCidade.innerText = doador.cidade?.nome;
+    tdNome.innerText = beneficiario.nome,
+    tdCpf.innerText = beneficiario.cpf,
+    tdCidade.innerText = beneficiario.cidade?.nome,
     tdAcoes.innerHTML = `
       <a class="btn btn-outline-primary btn-sm" href="beneficiarioFormulario.html?id=${beneficiario.id}">Editar</a>
       <button class="btn btn-outline-danger btn-sm" onclick="excluir(${beneficiario.id})">Excluir</button>
@@ -41,4 +41,4 @@ async function excluir (id) {
   
 }
 
-buscarBeneficiario();
+buscarDoador();
