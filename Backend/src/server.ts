@@ -1,6 +1,6 @@
 import express, { Express, NextFunction, Request, Response } from 'express';
 import cors from 'cors';
-import beneficiarioRoutes from './routes/beneficiario'
+import beneficiarioRoutes from './routes/beneficiarios'
 import categoriasRoutes from './routes/categorias'
 import cdRoutes from './routes/cd'
 import cd_itemRoutes from './routes/cd_item'
