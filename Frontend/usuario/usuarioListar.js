@@ -7,10 +7,10 @@ async function buscarUsuario () {
   for (let usuario of usuarios) {
     let tr = document.createElement('tr');
     let tdNome = document.createElement('td');
-    let tdEmail = document.createElement('email');
+    let tdEmail = document.createElement('td');
     let tdAcoes = document.createElement('td');
 
-    tdNome.innerText = usuario.descricao;
+    tdNome.innerText = usuario.nome;
     tdEmail.innerText = usuario.email;
     tdAcoes.innerHTML = `
       <a class="btn btn-outline-primary btn-sm" href="usuarioFormulario.html?id=${usuario.id}">Editar</a>
@@ -19,7 +19,7 @@ async function buscarUsuario () {
 
     tdAcoes.classList = "text-center";
     tr.appendChild(tdNome);
-    ts.appendChild(tdEmail);
+    tr.appendChild(tdEmail);
     tr.appendChild(tdAcoes);
 
     corpoTabela.appendChild(tr);
@@ -38,4 +38,4 @@ async function excluir (id) {
   
 }
 
-buscarCategoria();
+buscarUsuario();

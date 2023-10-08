@@ -10,7 +10,7 @@ async function buscarDados () {
   let resposta = await fetch('http://localhost:3000/usuarios/' + id);
   if (resposta.ok) {
     let usuario = await resposta.json();
-    inputNome.value = usuario.descricao;
+    inputNome.value = usuario.nome;
     inputEmail.value = usuario.email;
     inputSenha.value = usuario.senha;
   } else if (resposta.status === 422) {
@@ -29,12 +29,14 @@ form.addEventListener('submit', async (event) => {
   event.stopPropagation();
   event.preventDefault();
 
-  let descricao = inputNome.value;
+  let nome = inputNome.value;
   let email = inputEmail.value;
+  let senha = inputSenha.value;
 
   let payload = {
-    descricao,
+    nome,
     email,
+    senha
   }
 
   let url = 'http://localhost:3000/usuarios';
