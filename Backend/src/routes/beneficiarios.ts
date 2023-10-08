@@ -52,7 +52,7 @@ router.post('/beneficiario', validarPayload, beneficiarioController.create);
 
 router.put('/beneficiario/:id', validarSeExiste, beneficiarioController.update);
 
-router.delete('/beneficiario/:id', beneficiarioController.delete);
+router.delete('/beneficiario/:id',validarSeExiste, beneficiarioController.delete);
 
 export default router;
 

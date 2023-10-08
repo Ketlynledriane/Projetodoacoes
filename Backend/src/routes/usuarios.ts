@@ -45,7 +45,7 @@ router.post('/usuarios', validarPayload, usuarioController.create);
 
 router.put('/usuarios/:id', validarSeExiste, usuarioController.update);
 
-router.delete('/usuarios/:id', usuarioController.delete);
+router.delete('/usuarios/:id', validarSeExiste, usuarioController.delete);
 
 router.get('/usuarios/:id', validarSeExiste, usuarioController.find);
 
