@@ -1,6 +1,6 @@
 import express, { Express, NextFunction, Request, Response } from 'express';
 import cors from 'cors';
-import beneficiarioRoutes from './routes/beneficiarios'
+import beneficiariosRoutes from './routes/beneficiarios'
 import categoriasRoutes from './routes/categorias'
 import cdRoutes from './routes/cd'
 import cd_itemRoutes from './routes/cd_item'
@@ -8,7 +8,7 @@ import cidadeRoutes from './routes/cidades'
 import doadorRoutes from './routes/doador'
 import itensRoutes from './routes/itens'
 import movimentacaoRoutes from './routes/movimentacao'
-import usuarioRoutes from './routes/usuario'
+import usuariosRoutes from './routes/usuarios'
 
 
 let server: Express = express();
@@ -22,7 +22,7 @@ server.use((req: Request, res: Response, next: NextFunction) => {
     next();
 });
 
-server.use(beneficiarioRoutes);
+server.use(beneficiariosRoutes);
 server.use(categoriasRoutes);
 server.use(cd_itemRoutes);
 server.use(cdRoutes);
@@ -30,7 +30,7 @@ server.use(cidadeRoutes);
 server.use(doadorRoutes);
 server.use(itensRoutes);
 server.use(movimentacaoRoutes);
-server.use(usuarioRoutes);
+server.use(usuariosRoutes);
 
 
 export default {

@@ -39,14 +39,14 @@ let router : Router = Router();
 
 let usuarioController: UsuariosControllers = new UsuariosControllers();
 
-router.get('/usuario', usuarioController.list);
+router.get('/usuarios', usuarioController.list);
 
-router.post('/usuario', validarPayload, usuarioController.create);
+router.post('/usuarios', validarPayload, usuarioController.create);
 
-router.put('/usuario/:id', validarSeExiste, usuarioController.update);
+router.put('/usuarios/:id', validarSeExiste, usuarioController.update);
 
-router.delete('/usuario/:id', usuarioController.delete);
+router.delete('/usuarios/:id', usuarioController.delete);
 
-router.get('/usuario/:id', validarSeExiste, usuarioController.find);
+router.get('/usuarios/:id', validarSeExiste, usuarioController.find);
 
 export default router;
