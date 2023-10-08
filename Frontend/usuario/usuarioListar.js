@@ -6,11 +6,11 @@ async function buscarUsuario () {
 
   for (let usuario of usuarios) {
     let tr = document.createElement('tr');
-    let tdDescricao = document.createElement('td');
+    let tdNome = document.createElement('td');
     let tdEmail = document.createElement('email');
     let tdAcoes = document.createElement('td');
 
-    tdDescricao.innerText = usuario.descricao;
+    tdNome.innerText = usuario.descricao;
     tdEmail.innerText = usuario.email;
     tdAcoes.innerHTML = `
       <a class="btn btn-outline-primary btn-sm" href="usuarioFormulario.html?id=${usuario.id}">Editar</a>
@@ -18,7 +18,7 @@ async function buscarUsuario () {
     `;
 
     tdAcoes.classList = "text-center";
-    tr.appendChild(tdDescricao);
+    tr.appendChild(tdNome);
     ts.appendChild(tdEmail);
     tr.appendChild(tdAcoes);
 

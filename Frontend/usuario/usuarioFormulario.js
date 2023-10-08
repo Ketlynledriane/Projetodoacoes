@@ -1,7 +1,7 @@
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get('id');
 
-let inputDescricao = document.getElementById('nome');
+let inputNome = document.getElementById('nome');
 let inputEmail = document.getElementById('email');
 let inputSenha = document.getElementById('senha');
 let form = document.getElementById('formulario');
@@ -10,8 +10,9 @@ async function buscarDados () {
   let resposta = await fetch('http://localhost:3000/usuarios/' + id);
   if (resposta.ok) {
     let usuario = await resposta.json();
-    inputDescricao.value = usuario.descricao;
+    inputNome.value = usuario.descricao;
     inputEmail.value = usuario.email;
+    inputSenha.value = usuario.senha;
   } else if (resposta.status === 422) {
     let e = await resposta.json();
     alert(e.error);
@@ -28,7 +29,7 @@ form.addEventListener('submit', async (event) => {
   event.stopPropagation();
   event.preventDefault();
 
-  let descricao = inputDescricao.value;
+  let descricao = inputNome.value;
   let email = inputEmail.value;
 
   let payload = {
