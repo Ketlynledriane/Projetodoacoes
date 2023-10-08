@@ -1,7 +1,7 @@
 let corpoTabela = document.getElementById('corpo-tabela');
 
 async function buscarBeneficiario () {
-  let resposta = await fetch('http://localhost:3000/beneficiarios');
+  let resposta = await fetch('http://localhost:3000/beneficiario');
   let beneficiarios = await resposta.json();
 
   for (let beneficiario of beneficiarios) {
@@ -32,13 +32,12 @@ async function buscarBeneficiario () {
 async function excluir (id) {
   let confirma = confirm("Deseja excluir esse beneficiário? Esta ação não pode ser revertida.")
   if(confirma) {
-    await fetch('http://localhost:3000/beneficiarios/' + id, {
+    await fetch('http://localhost:3000/beneficiario/' + id, {
     method: 'DELETE'
   });
 
   window.location.reload();
   }
-  
 }
 
-buscarDoador();
+buscarBeneficiario();

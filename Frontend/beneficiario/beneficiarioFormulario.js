@@ -7,7 +7,7 @@ let campoCidades = document.getElementById('cidades')
 let form = document.getElementById('formulario');
 
 async function buscarDados () {
-  let resposta = await fetch('http://localhost:3000/beneficiarios/' + id);
+  let resposta = await fetch('http://localhost:3000/beneficiario/' + id);
   if (resposta.ok) {
     let beneficiario = await resposta.json();
     inputNome.value = beneficiario.nome;
@@ -35,7 +35,7 @@ form.addEventListener('submit', async (event) => {
     id_cidade
   }
 
-  let url = 'http://localhost:3000/beneficiarios';
+  let url = 'http://localhost:3000/beneficiario';
   let method = 'POST';
   if (id) {
     url += '/' + id;

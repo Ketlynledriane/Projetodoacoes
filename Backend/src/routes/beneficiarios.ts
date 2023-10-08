@@ -44,15 +44,15 @@ let router: Router = Router();
 
 let beneficiarioController: BeneficiariosControllers = new BeneficiariosControllers();
 
-router.get('/beneficiarios', beneficiarioController.list);
+router.get('/beneficiario', beneficiarioController.list);
 
-router.get('/beneficiarios/:id', validarSeExiste, beneficiarioController.find);
+router.get('/beneficiario/:id', validarSeExiste, beneficiarioController.find);
 
-router.post('/beneficiarios', validarPayload, beneficiarioController.create);
+router.post('/beneficiario', validarPayload, beneficiarioController.create);
 
-router.put('/beneficiarios/:id', validarSeExiste, beneficiarioController.update);
+router.put('/beneficiario/:id', validarSeExiste, beneficiarioController.update);
 
-router.delete('/beneficiarios/:id', beneficiarioController.delete);
+router.delete('/beneficiario/:id', beneficiarioController.delete);
 
 export default router;
 
