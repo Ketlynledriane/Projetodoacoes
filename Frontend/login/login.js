@@ -23,7 +23,7 @@ document.getElementById("form").addEventListener('submit', async (event) => {
   });
 
   if (resposta.ok) {
-    window.location.href = '../cd/cd.html' // Autenticado, tela inicial
+    window.location.href = '../movimentacao/entradaDoacoes/receberDoacao.html' // Autenticado, tela inicial
   } else {
     alert('Usuário ou senha incorretos!');
   }

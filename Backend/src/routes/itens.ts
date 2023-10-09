@@ -7,7 +7,7 @@ async function validarPayload (req: Request, res: Response, next: NextFunction):
     let schema = yup.object({
         descricao: yup.string().min(3).max(255).required(),
         id_categoria: yup.number().required(),
-        cds: yup.array().required()
+        cds: yup.object().required()
     });
 
     let payload = req.body;
