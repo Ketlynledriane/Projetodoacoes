@@ -13,11 +13,15 @@
     <title>Login</title>
   </head>
   <body class="bg-light" style="height: 100vh;">
-    <div class="d-flex h-100 w-100 align-items-center justify-content-center">
+    <div class="d-flex flex-column h-100 w-100 align-items-center justify-content-center">
+      <div class="d-flex align-items-center justify-content-center">
+        <img src="img/apoiar.png" height = "100px" width="100px"/>
+        <h3>DOE Crie_TI</h3>
+      </div>
       <div class="col-11 col-md-8 col-lg-3 col-xl-3 mt-20 bg-white p-4 rounded shadow">
         <form id="form">
           <div class="form-group">
-            <label for="email">E-mail</label>
+            <label class="fw-semibold" for="email">E-mail</label>
             <input
               type="email"
               class="form-control"
@@ -25,9 +29,8 @@
               aria-describedby="emailHelp"
               placeholder="joao@gmail.com"
             />
-          </div>
           <div class="form-group">
-            <label for="senha">Senha</label>
+            <label class="fw-semibold" for="senha">Senha</label>
             <input
               type="password"
               class="form-control"

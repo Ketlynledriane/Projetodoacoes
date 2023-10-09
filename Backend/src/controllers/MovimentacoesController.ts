@@ -51,13 +51,13 @@ export class MovimentacoesController {
         return res.status(201).json({message: "Criado com sucesso!"});
     }
 
-    // async delete (req: Request, res: Response): Promise<Response> {
-    //     let movimentacao: Movimentacao = res.locals.movimentacao;
+    async delete (req: Request, res: Response): Promise<Response> {
+        let movimentacao: Movimentacao = res.locals.movimentacao;
 
-    //     movimentacao.remove();
+        movimentacao.remove();
 
-    //     return res.status(204)
-    // 
+        return res.status(204)
+}
     
     async list (req: Request, res: Response): Promise<Response> {
         const movimentacoes = await AppDataSource.getRepository(Movimentacao).find({
@@ -89,7 +89,9 @@ export class MovimentacoesController {
     }
 
     async find (req: Request, res: Response): Promise<Response> {
+        console.log(1)
         let movimentacao: Movimentacao = res.locals.movimentacao;
+        console.log(2)
         return res.status(200).json(movimentacao);
     }
 

@@ -20,9 +20,9 @@ async function buscarMovimentacao () {
     tdData_hora.innerText = new Date(movimentacao.data_hora).toLocaleString()
     tdAcoes.innerHTML = `
       <a class="btn btn-outline-primary btn-sm" href="saidaDoacoesFormulario.html?id=${movimentacao.id}">Editar</a>
-       
+
     `;
-    // <button class="btn btn-outline-danger btn-sm" onclick="excluir(${movimentacao.id})">Excluir</button> 
+    //<button class="btn btn-outline-danger btn-sm" onclick="excluir(${movimentacao.id})">Excluir</button> 
 
     tdAcoes.classList = "text-center";
     tr.appendChild(tdBeneficiario);

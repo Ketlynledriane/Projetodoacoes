@@ -43,6 +43,8 @@ async function validarSeExiste (req: Request, res: Response, next: NextFunction)
     } else {
         res.locals.movimentacao = movimentacao;
     }
+
+    return next();
 }
 
 async function verificaTipo (req: Request, res: Response, next: NextFunction): Promise<Response|void>{
