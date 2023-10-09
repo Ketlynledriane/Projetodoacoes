@@ -44,13 +44,24 @@ export class UsuariosControllers {
     } 
 
     async delete (req: Request, res: Response): Promise<Response> {
-    let usuario: Usuarios = res.locals.usuario;
+        let usuario: Usuarios = res.locals.usuario;
 
-    usuario.remove();
-    
-    return res.status(200).json();
-
+        usuario.remove();
+        
+        return res.status(200).json();
     }
     
-    
+    async login (req: Request, res: Response): Promise<Response> {
+        let body = req.body;
+        // let senha = md5(body.senha);
+        let usuarioLogin = await Usuarios.findOneBy({email: body.email, senha: body.senha});
+
+        if (usuarioLogin) {
+            return res.status(200).json();
+        }
+
+        return res.status(422).json({
+            mensagem: "Usuário ou senha incorretos"
+        });
+    }
 }

@@ -9,11 +9,13 @@ async function buscarItem () {
     let tdCategorias = document.createElement('td');
     let tdCd = document.createElement('td');
     let tdDescricao = document.createElement('td');
+    let tdQuantidade = document.createElement('td');
     let tdAcoes = document.createElement('td');
 
     tdDescricao.innerText = item.descricao;
     tdCategorias.innerText = item.categoria.descricao;
     tdCd.innerText = item.cd_itens?.map(cd_item => cd_item.cd.nome)?.join(", ");
+    tdQuantidade.innerHTML = item.cd_itens?.map(cd_item => cd_item.estoque || 0).reduce((partialSum, a) => partialSum + a, 0)
     tdAcoes.innerHTML = `
       <a class="btn btn-outline-primary btn-sm" href="itensFormulario.html?id=${item.id}">Editar</a>
       <button class="btn btn-outline-danger btn-sm" onclick="excluir(${item.id})">Excluir</button>
@@ -23,6 +25,7 @@ async function buscarItem () {
     tr.appendChild(tdDescricao);
     tr.appendChild(tdCategorias)
     tr.appendChild(tdCd)
+    tr.appendChild(tdQuantidade)
     tr.appendChild(tdAcoes);
 
 

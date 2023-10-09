@@ -44,25 +44,34 @@ export class ItensController {
         item.id_categoria = body.id_categoria,
         await item.save();
 
+        for (let cd_id of Object.keys(body.cds)) {
+            let cdData = body.cds[cd_id]; 
+            let cdId = Number(cd_id);
 
-        await body.cds?.forEach(async (cd_id: number) => {
-            let existe = await CD_Itens.findOneBy({
+            let cdItem = await CD_Itens.findOneBy({
                 id_itens: item.id,
-                id_cd: cd_id,
-            })
+                id_cd: cdId,
+            });
 
-            if (!existe) {
-                await CD_Itens.create({
+            if (cdData["ativo"] == "0") {
+                console.log("Inativo", cdData, cdItem);
+                if (!cdItem) continue;
+
+                await cdItem.remove();
+                continue;
+            }
+
+            if (!cdItem) {
+                cdItem = await CD_Itens.create({
                     id_itens: item.id,
-                    id_cd: cd_id,
+                    id_cd: cdId,
                     estoque: 0
                 }).save();
             }
 
-            // Se ja existe, ignorar
-        });
-
-        // TODO - Permitir remover CDs?
+            cdItem.estoque = cdData.estoque ? Number(cdData.estoque) : 0;
+            await cdItem.save();
+        }
 
     
         return res.status(200).json(item);

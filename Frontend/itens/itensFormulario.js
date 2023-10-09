@@ -6,6 +6,8 @@ let campoCd = document.getElementById('cd');
 let campoCategoria = document.getElementById('categoria');
 let form = document.getElementById('formulario');
 
+let bodyTableEstqoue = document.getElementById("bodyTableEstoque");
+
 async function buscarDados () {
   let resposta = await fetch('http://localhost:3000/itens/' + id);
   if (resposta.ok) {
@@ -14,13 +16,16 @@ async function buscarDados () {
     campoCategoria.value = itens.categoria.id;
 
     // Seleciona os CDs no campo select multiplo
-    let values = itens.cd_itens?.map(cd_item => cd_item.cd.id.toString());
-    for (let i = 0; i < campoCd.options.length; i++) {
-        campoCd.options[i].selected = values.indexOf(campoCd.options[i].value) >= 0;
-        if (campoCd.options[i].selected) {
-            campoCd.options[i].disabled = true;
-        }
-    }
+    itens.cd_itens?.map(cd_item => {
+      document.getElementById(`ativo_${cd_item.id_cd}`).value = "1";
+      document.getElementById(`estoque_${cd_item.id_cd}`).value = cd_item.estoque;
+    });
+    // for (let i = 0; i < campoCd.options.length; i++) {
+    //     campoCd.options[i].selected = values.indexOf(campoCd.options[i].value) >= 0;
+    //     if (campoCd.options[i].selected) {
+    //         campoCd.options[i].disabled = true;
+    //     }
+    // }
 
   } else if (resposta.status === 422) {
     let e = await resposta.json();
@@ -35,16 +40,40 @@ form.addEventListener('submit', async (event) => {
   event.stopPropagation();
   event.preventDefault();
 
-  let descricao = inputDescricao.value;
-  let id_categoria = campoCategoria.value;
+  let campos = Array.from(new FormData(event.target));
+  let payload = {};
+  payload["cds"] = {};
+  console.log(campos);
+  campos.map(([name, value]) => {
+    if (name.indexOf("estoque") >= 0) {
+      let cdData = name.split("_");
+      payload["cds"][cdData[1]] = {
+        ...payload["cds"][cdData[1]],
+        estoque: value
+      }
+    } else if (name.indexOf("ativo") >= 0) {
+      let cdData = name.split("_");
+      payload["cds"][cdData[1]] = {
+        ...payload["cds"][cdData[1]],
+        ativo: value
+      }
+    } else {
+      payload[name] = value;
+    }
+  });
 
-  let cds = Array.from(campoCd.selectedOptions).map(({ value }) => value)
 
-  let payload = {
-    descricao,
-    cds,
-    id_categoria
-  }
+
+  // let descricao = inputDescricao.value;
+  // let id_categoria = campoCategoria.value;
+
+  // let cds = Array.from(campoCd.selectedOptions).map(({ value }) => value)
+
+  // let payload2 = {
+  //   descricao,
+  //   cds,
+  //   id_categoria
+  // }
 
   let url = 'http://localhost:3000/itens';
   let method = 'POST';
@@ -88,12 +117,33 @@ async function buscarCd () {
     let cds = await resposta.json();
   
     for (let cd of cds) {
-      let option = document.createElement('option');
+      let tr = document.createElement('tr');
+
+      tr.innerHTML = `
+        <tr>
+          <td>${cd.nome}</td>
+          <td>
+            <select id="ativo_${cd.id}" name="ativo_${cd.id}" class="cd_ativo form-control">
+              <option value="0">Não</option>  
+              <option value="1">Sim</option>
+            </select>
+          </td>
+          <td>
+            <input id="estoque_${cd.id}" name="estoque_${cd.id}" type="number" class="cd_estoque form-control" />
+          </td>
+        </tr>
+      `;
+
+      bodyTableEstqoue.appendChild(tr);
+
+
+
+      // let option = document.createElement('option');
   
-      option.innerHTML = cd.nome;
-      option.value = cd.id;
+      // option.innerHTML = cd.nome;
+      // option.value = cd.id;
   
-      campoCd.appendChild(option);
+      // campoCd.appendChild(option);
     }
   }
 

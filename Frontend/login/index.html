@@ -12,33 +12,36 @@
     />
     <title>Login</title>
   </head>
-  <body class="bg-light h-100 w-100">
-    <div class="flex h-100 w-100">
-    <div class="container mt-20 bg-white pb-lg-5 p-xxl-4 rounded shadow">
-      <form>
-        <div class="form-group">
-          <label for="exampleInputEmail1">E-mail</label>
-          <input
-            type="email"
-            class="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            placeholder="joao@gmail.com"
-          />
-        </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Senha</label>
-          <input
-            type="password"
-            class="form-control"
-            id="exampleInputPassword1"
-          />
-        </div>
-        <div class="d-flex justify-content-end mt-2 gap-2">
-          <button type="submit" class="btn btn-primary">Acessar</button>
-        </div>
-      </form>
+  <body class="bg-light" style="height: 100vh;">
+    <div class="d-flex h-100 w-100 align-items-center justify-content-center">
+      <div class="col-11 col-md-8 col-lg-3 col-xl-3 mt-20 bg-white p-4 rounded shadow">
+        <form id="form">
+          <div class="form-group">
+            <label for="email">E-mail</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              aria-describedby="emailHelp"
+              placeholder="joao@gmail.com"
+            />
+          </div>
+          <div class="form-group">
+            <label for="senha">Senha</label>
+            <input
+              type="password"
+              class="form-control"
+              id="senha"
+            />
+          </div>
+          <div class="d-flex justify-content-end mt-2 gap-2">
+            <button type="submit" class="btn btn-primary">Acessar</button>
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
+
+
+    <script src="login.js"></script>
   </body>
 </html>

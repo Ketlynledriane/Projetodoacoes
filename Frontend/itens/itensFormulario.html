@@ -22,18 +22,18 @@
         </div>
         <div class="col-12">
           <form id="formulario">
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label>Selecione o CD:</label>
               <select multiple required id="cd" class="form-control">
               </select>
-            </div>
+            </div> -->
             <div class="form-group">
                 <label>Selecione a Categoria:</label>
-                <select required id="categoria" class="form-control">
+                <select name="id_categoria" required id="categoria" class="form-control">
                   <option>Selecione...</option>
                 </select>
               </div>
-            <div class="form-group">
+            <div class="form-group mt-2">
               <label>Nome do item:</label>
               <input
                 class="form-control"
@@ -43,6 +43,23 @@
                 required
               />
             </div>
+
+            <div>
+              <h4 class="text-center mt-4">Estoques</h4>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>CD</th>
+                    <th>Ativo</th>
+                    <th>Estoque</th>
+                  </tr>
+                </thead>
+                <tbody id="bodyTableEstoque">
+                </tbody>
+              </table>
+            </div>
+
+
             <div class="d-flex justify-content-end mt-2 gap-2">
               <a class="btn btn-outline-secondary" href="itens.html">Voltar</a>
               <button class="btn btn-primary">Salvar</button>

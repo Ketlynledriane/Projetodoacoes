@@ -49,4 +49,6 @@ router.delete('/usuarios/:id', validarSeExiste, usuarioController.delete);
 
 router.get('/usuarios/:id', validarSeExiste, usuarioController.find);
 
+router.post('/usuarios/login', usuarioController.login);
+
 export default router;
