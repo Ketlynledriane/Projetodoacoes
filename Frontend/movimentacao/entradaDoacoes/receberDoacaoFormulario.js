@@ -18,6 +18,9 @@ async function buscarDados () {
   } else if (resposta.status === 422) {
     let e = await resposta.json();
     alert(e.error);
+  } else if (resposta.status === 422) {
+    let e = await resposta.json();
+    alert(e.message || e.mensagem || e.error || "Algo deu errado!");
   } else {
     alert('Ops! Algo deu errado!');
   }

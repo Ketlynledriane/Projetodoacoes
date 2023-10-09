@@ -28,7 +28,24 @@ export class MovimentacoesController {
             objeto = await Beneficiarios.findOneBy({ id: body.beneficiario_id });
         }
 
-        let cdItem = await CD_Itens.findOneBy({id_cd: body.cd_id, id_itens: body.item_id}) 
+        let cdItem = await CD_Itens.findOneBy({id_cd: body.cd_id, id_itens: body.item_id});
+
+        // Verifica se tem estoque suficiente para retirada
+        if (body.tipo != "doacao") {
+            if (cdItem) {
+                if (cdItem.estoque < body.quantidade) {
+                    return res.status(422).json({
+                        message: "Estoque não é suficiente"
+                    });
+                }
+            } else {
+                return res.status(422).json({
+                    message: "Não existe estoque neste cd para o item selecionado"
+                });
+            }
+        }
+
+
         if (! cdItem ) {
             cdItem = await CD_Itens.create({
                 id_cd: body.cd_id,
@@ -36,7 +53,11 @@ export class MovimentacoesController {
                 estoque: body.quantidade
             }).save();
         } else {
-            cdItem.estoque = (cdItem.estoque || 0) + body.quantidade;
+            if (body.tipo == "doacao") {
+                cdItem.estoque = (cdItem.estoque || 0) + body.quantidade;
+            } else {
+                cdItem.estoque = (cdItem.estoque || 0) - body.quantidade;
+            }
             await cdItem.save();
         }
 
@@ -112,16 +133,34 @@ export class MovimentacoesController {
             if (movimentacao.cd_item.id != cdItem.id) {
                 // remove estoque do antigo
                 let oldCdItem = movimentacao.cd_item;
-                oldCdItem.estoque = (oldCdItem.estoque || 0) - movimentacao.quantidade;
+
+                if (body.tipo == "doacao") {
+                    oldCdItem.estoque = (oldCdItem.estoque || 0) - movimentacao.quantidade;
+                } else {
+                    oldCdItem.estoque = (oldCdItem.estoque || 0) + movimentacao.quantidade;
+                }
+
                 await oldCdItem.save();
 
                 // adiciona no novo
-                cdItem.estoque = (cdItem.estoque || 0) + body.quantidade;
+                if (body.tipo == "doacao") {
+                    cdItem.estoque = (cdItem.estoque || 0) + body.quantidade;
+                } else {
+                    cdItem.estoque = (cdItem.estoque || 0) - body.quantidade;
+                }
             } else {
                 if (movimentacao.quantidade < body.quantidade) {
-                    cdItem.estoque = (cdItem.estoque || 0) + (body.quantidade - movimentacao.quantidade)
+                    if (body.tipo == "doacao") {
+                        cdItem.estoque = (cdItem.estoque || 0) + (body.quantidade - movimentacao.quantidade)
+                    } else {
+                        cdItem.estoque = (cdItem.estoque || 0) - (body.quantidade - movimentacao.quantidade)
+                    }
                 } else {
-                    cdItem.estoque = (cdItem.estoque || 0) - (movimentacao.quantidade - body.quantidade)
+                    if (body.tipo == "doacao") {
+                        cdItem.estoque = (cdItem.estoque || 0) - (movimentacao.quantidade - body.quantidade)
+                    } else {
+                        cdItem.estoque = (cdItem.estoque || 0) + (movimentacao.quantidade - body.quantidade)
+                    }
                 }
             }
 
@@ -137,9 +176,7 @@ export class MovimentacoesController {
     }
 
     async find (req: Request, res: Response): Promise<Response> {
-        console.log(1)
         let movimentacao: Movimentacao = res.locals.movimentacao;
-        console.log(2)
         return res.status(200).json(movimentacao);
     }
 

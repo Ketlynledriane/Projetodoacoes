@@ -17,7 +17,7 @@ async function buscarDados () {
     inputQuantidade.value = movimentacao.quantidade;
   } else if (resposta.status === 422) {
     let e = await resposta.json();
-    alert(e.error);
+    alert(e.message || e.mensagem || e.error);
   } else {
     alert('Ops! Algo deu errado!');
   }
@@ -59,6 +59,9 @@ form.addEventListener('submit', async (event) => {
 
   if (resposta.ok) {
     window.location.href = 'saidaDoacoes.html'
+  } else if (resposta.status === 422) {
+    let e = await resposta.json();
+    alert(e.message || e.mensagem || e.error || "Algo deu errado!");
   } else {
     alert('Ops! Algo deu errado!');
   }
