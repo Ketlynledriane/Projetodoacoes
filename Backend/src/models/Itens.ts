@@ -14,7 +14,7 @@ export class Itens extends BaseEntity {
     public id_categoria: number;
 
     @ManyToOne(() => Categorias, (categoria) => categoria.itens, {
-    eager: true
+        eager: true
     })
     @JoinColumn({ name: 'id_categoria' })
     public categoria: Categorias;

@@ -4,6 +4,8 @@ import PromptSync from "prompt-sync";
 import { Movimentacao } from "../models/Movimentacao";
 import { MovimentacaoRequest } from "../routes/movimentacao";
 import { Request, Response } from 'express';
+import { CD_Itens } from "../models/CD_Itens";
+import AppDataSource from "../db";
 const prompt = PromptSync();
 
 export class MovimentacoesController {
@@ -26,10 +28,22 @@ export class MovimentacoesController {
             objeto = await Beneficiarios.findOneBy({ id: body.beneficiario_id });
         }
 
+        let cdItem = await CD_Itens.findOneBy({id_cd: body.cd_id, id_itens: body.item_id}) 
+        if (! cdItem ) {
+            cdItem = await CD_Itens.create({
+                id_cd: body.cd_id,
+                id_itens: body.item_id,
+                estoque: body.quantidade
+            }).save();
+        } else {
+            cdItem.estoque = (cdItem.estoque || 0) + body.quantidade;
+            await cdItem.save();
+        }
+
         await Movimentacao.create({
             data_hora: new Date,
             tipo: body.tipo,
-            cd_item_id: body.item_id,
+            cd_item_id: cdItem.id,
             quantidade: body.quantidade,
             [coluna]: objeto
         } as any).save();
@@ -37,17 +51,30 @@ export class MovimentacoesController {
         return res.status(201).json({message: "Criado com sucesso!"});
     }
 
-    async delete (req: Request, res: Response): Promise<Response> {
-        let movimentacao: Movimentacao = res.locals.movimentacao;
+    // async delete (req: Request, res: Response): Promise<Response> {
+    //     let movimentacao: Movimentacao = res.locals.movimentacao;
 
-        movimentacao.remove();
+    //     movimentacao.remove();
 
-        return res.status(204)
-    }
+    //     return res.status(204)
+    // 
     
     async list (req: Request, res: Response): Promise<Response> {
-        let listar = await Movimentacao.find();
-        return res.status(200).json({movimentacoes: listar})
+        const movimentacoes = await AppDataSource.getRepository(Movimentacao).find({
+            where: {
+                tipo: res.locals.tipo
+            },
+            relations: {
+                cd_item: {
+                    item: true,
+                }
+            },
+        })
+
+
+        // let listar = await Movimentacao.find();
+
+        return res.status(200).json(movimentacoes)
     }
 
     async edit(req: Request, res: Response) {

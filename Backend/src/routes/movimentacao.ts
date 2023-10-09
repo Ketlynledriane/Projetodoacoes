@@ -1,7 +1,5 @@
 import { NextFunction, Router, Request, Response } from "express";
-import { CategoriasController } from "../controllers/Categoriascontroller";
 import * as yup from 'yup';
-import { Categorias } from "../models/Categorias";
 import { Movimentacao } from "../models/Movimentacao";
 import { MovimentacoesController } from "../controllers/MovimentacoesController";
 
@@ -11,6 +9,7 @@ export interface MovimentacaoRequest {
     quantidade: number;
     doador_id: number;
     beneficiario_id: number;
+    cd_id: number
 }
 
 async function validarPayload (req: Request, res: Response, next: NextFunction): Promise<Response|void>{
@@ -18,8 +17,9 @@ async function validarPayload (req: Request, res: Response, next: NextFunction):
         tipo: yup.string().min(3).max(255).required(),
         item_id: yup.number().required(),
         quantidade: yup.number().min(1).required(),
-        doador_id: yup.number(),
+        doador_id: yup.number().nullable(),
         beneficiario_id: yup.number(),
+        cd_id: yup.number()
     });
 
     let payload = req.body;
@@ -40,9 +40,14 @@ async function validarSeExiste (req: Request, res: Response, next: NextFunction)
     let movimentacao: Movimentacao|null = await Movimentacao.findOneBy ({ id });
     if ( ! movimentacao) {
         return res.status(422).json({error: 'Movimentação não encontrada!' });
+    } else {
+        res.locals.movimentacao = movimentacao;
     }
-    
-    res.locals.movimentacao = movimentacao;
+}
+
+async function verificaTipo (req: Request, res: Response, next: NextFunction): Promise<Response|void>{
+    let tipo = (req.params.tipo);
+    res.locals.tipo = tipo;
     
     return next();
 }
@@ -51,11 +56,11 @@ let router : Router = Router();
 
 let movimentacaoController: MovimentacoesController = new MovimentacoesController();
 
-router.get('/movimentacao', movimentacaoController.list);
+router.get('/movimentacao/listar/:tipo', verificaTipo, movimentacaoController.list);
 
 router.post('/movimentacao', validarPayload, movimentacaoController.create);
 
-router.delete('/movimentacao/:id', movimentacaoController.delete);
+// router.delete('/movimentacao/:id', movimentacaoController.delete);
 
 router.get('/movimentacao/relatorioDoacoes', movimentacaoController.relatorioDoacoes);
 
