@@ -11,10 +11,10 @@ async function buscarDados () {
   let resposta = await fetch('http://localhost:3000/movimentacao/' + id);
   if (resposta.ok) {
     let movimentacao = await resposta.json();
-    campoDoador.value = movimentacao.doador_id;
-    campoCd.value = movimentacao.cd_id;
-    campoItem.value = movimentacao.item_id;
-    inputQuantidade = movimentacao.quantidade;
+    campoDoador.value = movimentacao.doador?.id || "";
+    campoCd.value = movimentacao.cd_item.id_cd;
+    campoItem.value = movimentacao.cd_item.id_itens;
+    inputQuantidade.value = movimentacao.quantidade;
   } else if (resposta.status === 422) {
     let e = await resposta.json();
     alert(e.error);

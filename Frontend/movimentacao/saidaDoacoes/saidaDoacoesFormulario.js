@@ -11,9 +11,9 @@ async function buscarDados () {
   let resposta = await fetch('http://localhost:3000/movimentacao/' + id);
   if (resposta.ok) {
     let movimentacao = await resposta.json();
-    campoBeneficiario.value = movimentacao.beneficiario_id;
-    campoCd.value = movimentacao.cd_id;
-    campoItem.value = movimentacao.item_id;
+    campoBeneficiario.value = movimentacao.beneficiario?.id;
+    campoCd.value = movimentacao.cd_item.id_cd;
+    campoItem.value = movimentacao.cd_item.id_itens;
     inputQuantidade.value = movimentacao.quantidade;
   } else if (resposta.status === 422) {
     let e = await resposta.json();
