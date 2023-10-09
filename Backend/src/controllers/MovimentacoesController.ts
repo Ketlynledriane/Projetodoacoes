@@ -78,11 +78,59 @@ export class MovimentacoesController {
     }
 
     async edit(req: Request, res: Response) {
-        let movimentacao: Movimentacao = res.locals.movimentacao;
+        let body = req.body;
+        let movimentacao: any = res.locals.movimentacao;
 
-        movimentacao.tipo;
-        movimentacao.cd_item_id;
-        movimentacao.quantidade;
+        let coluna = "";
+        let objeto = null;
+
+        if (body.tipo == "doacao") {
+            coluna = "doador";
+            if (!body.doador_id) {   
+                objeto = null;            
+            } else {
+                objeto = await Doador.findOneBy({ id: body.doador_id });
+            }
+        } else {
+            coluna = "beneficiario";
+            objeto = await Beneficiarios.findOneBy({ id: body.beneficiario_id });
+        }
+
+        let cdItem = await CD_Itens.findOneBy({id_cd: body.cd_id, id_itens: body.item_id}) 
+        if (! cdItem ) {
+            // Remove movimentação antiga
+            let oldCdItem = movimentacao.cd_item;
+            oldCdItem.estoque = (oldCdItem.estoque || 0) - movimentacao.quantidade;
+            await oldCdItem.save();
+
+            cdItem = await CD_Itens.create({
+                id_cd: body.cd_id,
+                id_itens: body.item_id,
+                estoque: body.quantidade
+            }).save();
+        } else {
+            if (movimentacao.cd_item.id != cdItem.id) {
+                // remove estoque do antigo
+                let oldCdItem = movimentacao.cd_item;
+                oldCdItem.estoque = (oldCdItem.estoque || 0) - movimentacao.quantidade;
+                await oldCdItem.save();
+
+                // adiciona no novo
+                cdItem.estoque = (cdItem.estoque || 0) + body.quantidade;
+            } else {
+                if (movimentacao.quantidade < body.quantidade) {
+                    cdItem.estoque = (cdItem.estoque || 0) + (body.quantidade - movimentacao.quantidade)
+                } else {
+                    cdItem.estoque = (cdItem.estoque || 0) - (movimentacao.quantidade - body.quantidade)
+                }
+            }
+
+            await cdItem.save();
+        }
+
+        movimentacao.quantidade = body.quantidade;
+        movimentacao.cd_item_id = cdItem.id;
+        movimentacao[coluna] = objeto; // Doador ou beneficiario
 
         await movimentacao.save();
         return res.status(200).json(movimentacao);
